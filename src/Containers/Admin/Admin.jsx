@@ -66,7 +66,9 @@ class Admin extends React.Component {
             TempBlogImageURL: "",
             TempBlogImageALT: "",
             BlogTempImageProgress: 0,
-            TempBlogImageTitle: ""
+            TempBlogImageTitle: "",
+            //Signed In user data
+            signedInUserData: null
             //Blog Inside Image
             //For images
             ///////////////////////////////////Here the Blog states start/////////////////////////////////////////////////
@@ -78,14 +80,16 @@ class Admin extends React.Component {
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
                 this.setState({
-                    status: true
+                    status: true,
+                    signedInUserData: user
                 })
                 // setStatus(true);
             }
             else {
                 // setStatus(false)
                 this.setState({
-                    status: false
+                    status: false,
+                    signedInUserData: null
                 })
             }
         })
@@ -295,51 +299,63 @@ class Admin extends React.Component {
     }
 
     sendDataBlog = () => {
-        ////////////////////////////To take the current date and time//////////////////////////////////
-        let today = new Date();
-        let date = (today.getMonth() + 1) + today.getDate() + ',' + today.getFullYear();
-        let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-        let dateTime = date + ' ' + time;
-        dateTime = dateTime.toString();
-        ////////////////////////////To take the current date and time//////////////////////////////////
+        if (this.state.status != null) {
+            ////////////////////////////To take the current date and time//////////////////////////////////
+            let today = new Date();
+            let date = (today.getMonth() + 1) + today.getDate() + ',' + today.getFullYear();
+            let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+            let dateTime = date + ' ' + time;
+            dateTime = dateTime.toString();
+            ////////////////////////////To take the current date and time//////////////////////////////////
 
-        let key = firebase.database().ref('Blogs/').push().key;
+            //Initializing the database varaible db
+            const db = firebase.firestore();
+            // Initializing the ref for blog submission to database
+            const blogDbReference = db.collection(`Data/Blogs/${this.state.signedInUserData.email}`);
 
-        let Data = {
-            BlogTitle: this.state.BlogTitle,
-            BlogCategory: this.state.BlogCategory,
-            BlogDescription: this.state.BlogDescription,
-            BlogCoverImageUrl: this.state.BlogFrontImageURL,
-            BlogCoverPara: this.state.FrontParaBlog,
-            BlogAuthor: this.state.BlogAuthor,
-            BlogSubmissionDate: dateTime,
-            BlogHashTagsArray: this.state.BlogHashTagsArray,
-            Key: key,
+            //The object format in which data will be stored
+            let BlogDataObject = {
+                uid: this.state.signedInUserData.uid,
+                userEmail: this.state.signedInUserData.email,
+                BlogTitle: this.state.BlogTitle,
+                BlogCategory: this.state.BlogCategory,
+                BlogDescription: this.state.BlogDescription,
+                BlogCoverImageUrl: this.state.BlogFrontImageURL,
+                BlogCoverPara: this.state.FrontParaBlog,
+                BlogAuthor: this.state.BlogAuthor,
+                BlogSubmissionDate: dateTime,
+                BlogHashTagsArray: this.state.BlogHashTagsArray
+            }
+
+            blogDbReference.add(BlogDataObject).then(() => {
+                //Here when the data is sent successfully this function will be triggered
+                console.log("Data sent");
+                //Alert the user that blog is submitted
+                alert("Congratulations!.Your Blog is Submitted Successfully.");
+                //Clear the states
+                this.setState({
+                    // Here the attributes start for the blog
+                    BlogTitle: "",
+                    BlogCategory: "",
+                    BlogDescription: "",
+                    BlogFrontImageURL: "",
+                    FrontParaBlog: "",
+                    BlogAuthor: "",
+                    BlogHashTagsArray: [],
+                    BlogFrontImageProgress: 0
+                })
+            })
+
+        } else {
+            alert("Please sign in to submit the blog.");
         }
-
-        firebase.database().ref(`Blogs/`).push(Data)
-            .then(alert("Your Blog is Submitted Successfully."))
-
-        this.setState({
-            // Here the important attributes start
-            BlogTitle: "",
-            BlogCategory: "",
-            BlogDescription: "",
-            BlogFrontImageURL: "",
-            FrontParaBlog: "",
-            BlogAuthor: "",
-            BlogHashTagsArray: [],
-            BlogFrontImageProgress: 0
-        })
-
     }
-
 
     login = () => {
         firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
             .then((userCredential) => {
                 // Signed in
-                var user = userCredential.user;
+                let user = userCredential.user;
                 // console.log("The user is logged in and data is: " + user);
                 alert("Logged in successfully")
                 this.setState({
@@ -349,7 +365,7 @@ class Admin extends React.Component {
             })
             .catch((error) => {
                 // var errorCode = error.code;
-                var errorMessage = error.message;
+                let errorMessage = error.message;
                 console.log(errorMessage);
                 alert(errorMessage)
             });
