@@ -1,0 +1,90 @@
+#carouselBasicExample {
+    box-shadow: 0px 0px 0px rgb(61, 61, 61);
+    font-family: monospace;
+}
+
+.TitleCarousal {
+    font-size: 45px;
+    font-weight: normal;
+}
+
+.DiscCarousal {
+    font-size: 30px;
+    font-weight: lighter;
+}
+
+.carousel-caption {
+    margin-bottom: 10%;
+    transition: 0.5s linear;
+}
+
+.slide-image1 {
+    height: 100vh;
+    width: 100vw;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('http://www.ameradnan.com/wp-content/uploads/2018/01/Done.....jpg');
+}
+
+.slide-image2 {
+    height: 100vh;
+    width: 100vw;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('http://www.ameradnan.com/wp-content/uploads/2018/01/main-banner-min-1.jpg');
+}
+
+.slide-image3 {
+    height: 100vh;
+    width: 100vw;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('http://www.ameradnan.com/wp-content/uploads/2018/01/Untitled-1-1.jpg');
+}
+
+.left-right-icon {
+    font-size: 35px;
+}
+
+#btn-indicator {
+    color: white;
+    background: transparent;
+    outline: none;
+    font-size: 20px;
+    border: none;
+}
+
+#btn-indicator:hover {
+    outline: none;
+    border-radius: 50%;
+}
+
+.btn-indicatorInside {
+    color: white;
+    font-size: 20px;
+    background: transparent;
+    outline: none;
+    border-radius: 50%;
+    border: 3px solid transparent;
+}
+
+.btn-indicatorInside:hover {
+    border: 3px solid grey;
+    background: white;
+    outline: none;
+    border-radius: 50%;
+    transition: 0.3s linear;
+}
+@media all and (max-width:1000px) {
+    .carousel-caption {
+        margin-bottom: 5%;
+    }
+}
+@media all and (max-width:600px) {
+    .TitleCarousal {
+        font-size: 25px;
+    }
+    .DiscCarousal {
+        font-size: 15px;
+        width: 80%;
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+    .carousel-caption {
+        margin-bottom: 10%;
+    }
+}

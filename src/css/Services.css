@@ -1,0 +1,106 @@
+.text-services-page-title {
+    color: #d6ad34;
+    font-weight: 500;
+    font-size: 36px;
+    word-spacing: 5px;
+    text-transform: uppercase;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.projectBlock {
+    background-color: #d6ad34;
+    width: 100%;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.servicesImage {
+    width: 80%;
+}
+
+.projectBtn {
+    background-color: transparent;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    outline: none;
+    border: none;
+    color: white;
+    font-size: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: normal;
+    word-spacing: 5px;
+    text-decoration: underline;
+    text-transform: uppercase;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.projectBtn:hover {
+    text-decoration: none;
+}
+
+.projectBtn:enabled {
+    background-color: transparent;
+    outline: none;
+    border: none;
+}
+
+.disc_top_width {
+    width: 70%;
+    margin: 0 auto;
+}
+
+@media all and (max-width:1350px) {
+    .disc_top_width {
+        width: 100%;
+    }
+}
+
+@media all and (max-width:1200px) {
+    .caption {
+        top: 40%;
+    }
+}
+
+@media all and (max-width:750px) {
+    .caption {
+        top: 30%;
+    }
+}
+
+@media all and (max-width:650px) {
+    .caption {
+        top: 25%;
+    }
+}
+
+@media all and (max-width:600px) {
+    .servicesImage {
+        width: 100%;
+    }
+    .caption {
+        top: 50%;
+    }
+    .text-services-page-title {
+        font-size: 28px;
+    }
+}
+
+@media all and (max-width:380px) {
+    .projectBtn {
+        font-size: 20px;
+    }
+    .paddingMobileServices {
+        margin-left: 5% !important;
+    }
+}
+
+@media all and (max-width:320px) {
+    .servicesImage {
+        width: 100%;
+    }
+    .caption {
+        top: 40%;
+    }
+}

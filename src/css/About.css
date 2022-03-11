@@ -1,0 +1,168 @@
+.aboutImage {
+    box-shadow: 2px 2px 2px grey;
+    border: 10px solid #f2f2f2;
+    max-width: 100%;
+}
+
+.aboutHead {
+    color: #afafaf;
+    text-shadow: 1px 1px 1px #afafaf;
+}
+
+.about-title {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 1px #868686;
+}
+
+.about-para {
+    line-height: 25px;
+    color: #9e9e9e;
+    font-size: 15px;
+}
+
+/* For background image */
+
+.bgimg-1, .bgimg-2, .bgimg-3 {
+    position: relative;
+    opacity: 0.9;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.bgimg-1 {
+    background-image: url("http://www.ameradnan.com/wp-content/themes/ameradnan/images/blog-banner-new.jpg");
+    height: 90vh;
+    top: 0%;
+}
+.bgimg-1::after,.bgimg-2::after, .bgimg-3::after
+{
+    content: '';
+    position: absolute;
+    width: 100%; 
+    height:100%;
+    top:0; 
+    left:0;
+    background:rgba(0,0,0,0.2);
+    opacity: 1;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+}
+
+.caption {
+    /* background-color: rgba(134, 48, 48, 0.13); */
+    color: #fff;
+    padding: 18px;
+    font-size: 30px;
+    letter-spacing: 10px;
+    font: 600 15px/1.8 "Lato", sans-serif;
+    position: absolute;
+    left: 0;
+    top: 35%;
+    width: 100%;
+    text-align: center;
+    z-index: 10000;
+}
+
+/* For background image */
+
+.text-about-page-title {
+    text-align: center;
+    color: #d6ad34;
+    font-weight: 500;
+    font-size: 36px;
+    word-spacing: 5px;
+    text-transform: uppercase;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.row {
+    min-height: 50px;
+    width: 100%;
+}
+
+.mtfbHeading {
+    text-align: center;
+    color: #d6ad34;
+    font-weight: 500;
+    font-size: 36px;
+    word-spacing: 5px;
+    text-transform: uppercase;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.mtfbVideo {
+    width: 75%;
+    height: 415px;
+}
+
+.founderImage {
+    width: 80%;
+    margin-left: 10%;
+    margin-right: auto;
+    background-size: contain;
+}
+
+.marginDesktop {
+    margin-top: 50px;
+}
+
+@media all and (max-width:600px) {
+    .mtfbVideo {
+        width: 100%;
+        height: 250px;
+        margin-left: 5%;
+    }
+    .caption {
+        font-size: 25px;
+        letter-spacing: 5px;
+        padding: 5px;
+    }
+    .marginDesktop {
+        margin-top: -30px;
+        margin-left: 7%;
+    }
+    .paddingMobile {
+        padding-left: 5%;
+    }
+    .text-about-page-title {
+        font-size: 28px;
+        word-spacing: 3px;
+    }
+}
+
+@media all and (max-width:350px) {
+    .mtfbVideo {
+        height: 200px;
+        margin-left: 5%;
+    }
+    .paddingMobile {
+        margin-left: 5%;
+    }
+    .marginDesktop {
+        margin-left: 5%;
+    }
+    .founderImage {
+        margin-left: 10%;
+    }
+}
+
+@media all and (max-width:320px) {
+    .founderImage {
+        margin-left: 13%;
+    }
+}
+
+@media all and (max-width:300px) {
+    .paddingMobile {
+        margin-left: 8%;
+    }
+    .marginDesktop {
+        margin-left: 10%;
+    }
+    .founderImage {
+        margin-left: 15%;
+    }
+}

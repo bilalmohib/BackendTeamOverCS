@@ -1,0 +1,58 @@
+.card-text
+{
+    overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-box-orient: vertical;
+   -webkit-line-clamp: 2; /* number of lines to show */
+   max-height: 2;       /* fallback */
+}
+.projects-btn
+{
+    font-size: 16px !important;
+}
+.p-img
+{
+    width: 100%;
+}
+.check{
+    border: 1px solid purple;
+    margin-left: 50px;
+}
+.card
+{
+    width: 20rem;
+    margin-left: 30px;
+}
+@media all and (max-width:767px) {
+    .card
+    {
+        width: 25rem;
+    }
+}
+@media all and (max-width:460px) {
+    .card
+    {
+        width: 18rem;
+        margin-left: 50px;
+    }
+}
+@media all and (max-width:400px) {
+    .card
+    {
+        margin-left: 20px;
+    }
+}
+@media all and (max-width:340px) {
+    .card
+    {
+        margin-left: 5px;
+    }
+}
+@media all and (max-width:320px) {
+    .card
+    {
+        width: 17rem;
+        margin-left: 5px;
+    }
+}

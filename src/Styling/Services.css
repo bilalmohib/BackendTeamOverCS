@@ -1,0 +1,21 @@
+.s-para {
+    color: #686868;
+}
+
+.c-b {
+    color: #240900;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+#learnMore {
+    font-size: 16px;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+}
+
+@media all and (max-width:345px) {
+    .c-b {
+        font-size: 30px;
+    }
+}

@@ -1,0 +1,26 @@
+.cd .cr {
+    background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6vrGFxMygBLfk9xK7AUco0JK_3Y5C5npMsA&usqp=CAU');
+    padding-bottom: 70px;
+    padding-top: 65px;
+}
+
+.cd .cr .ct {
+    text-align: center;
+}
+
+.count {
+    font-weight: bold;
+    font-size: 60px;
+    font-family: serif;
+    color: #000;
+}
+
+.countp {
+    color: #474747;
+}
+
+@media all and (max-width:500px) {
+    .paddingMobileCD {
+        margin: 0 auto !important;
+    }
+}

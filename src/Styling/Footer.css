@@ -1,0 +1,66 @@
+.footer
+{
+    background-color: #292f32;
+}
+#footer-form-name,#footer-form-email,#footer-form-number,#footer-form-message
+{
+    border: 1px solid #383e41;
+    background-color: #292f32;
+    font-size: 20px;
+    border-radius: 0px;
+    color: white;
+}
+#btn-send
+{
+    font-size: 16px;
+}
+.text-grey
+{
+    color: #839294;
+}
+.text-grey:hover
+{
+    color: #839294;
+}
+.footer-logo
+{
+    margin-left: 0%;
+    margin-bottom: 20px;
+}
+@media all and (max-width:992px)
+{
+    .footer-logo
+    {
+        width: 220px;
+    }   
+}
+@media all and (max-width:768px)
+{
+    .footer-logo
+    {
+        width: 200px;
+        margin-left: -25%;
+    }   
+}
+@media all and (max-width:575px)
+{
+    .footer-logo
+    {
+        width: 250px;
+        margin-left: 0%;
+    }   
+}
+@media all and (max-width:340px)
+{
+    .footer-logo
+    {
+        width: 220px;
+    }   
+}
+@media all and (max-width:305px)
+{
+    .footer-logo
+    {
+        width: 190px;
+    }   
+}

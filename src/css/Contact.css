@@ -1,0 +1,90 @@
+.w-70p {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.w-100p {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.w-75p {
+    width: 75%;
+    margin: 0 auto;
+}
+
+#name, #email, #phone, #message {
+    font-size: 20px;
+}
+
+#sendbtn {
+    font-size: 18px;
+}
+
+#facebook-btn {
+    border-radius: 10px;
+    font-size: 20px;
+    width: initial !important;
+    background-color: #1a77f2 !important;
+}
+
+#twitter-btn {
+    border-radius: 10px;
+    font-size: 20px;
+    width: initial !important;
+    background-color: #1da1f2 !important;
+}
+
+#pinterest-btn {
+    border-radius: 10px;
+    font-size: 20px;
+    width: initial !important;
+    background-color: #e11a21 !important;
+}
+
+#instagram-btn {
+    border-radius: 10px;
+    font-size: 20px;
+    width: initial !important;
+    background: #f09433;
+    background: -moz-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    background: -webkit-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f09433', endColorstr='#bc1888', GradientType=1);
+}
+
+#whatsapp-btn {
+    border-radius: 10px;
+    font-size: 20px;
+    width: initial !important;
+    background-color: #0dc143 !important;
+}
+
+#linkedin-btn {
+    border-radius: 10px;
+    font-size: 20px;
+    width: initial !important;
+    background-color: #0077b5 !important;
+}
+.gitt
+{
+    color: #0279c0;
+    font-weight: 400;
+    font-size: 20px;
+}
+.gittd
+{
+    font-size: 20.5px;
+}
+
+@media all and (max-width:600px) {
+    .w-70p {
+        width: 100%;
+    }
+    .w-100p {
+        width: 100%;
+    }
+    .w-75p {
+        width: 100%;
+    }
+}

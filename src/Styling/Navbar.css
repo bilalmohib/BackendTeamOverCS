@@ -1,0 +1,236 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap');
+.dropdown:hover>.dropdown-menu {
+    display: block;
+}
+
+.dropdown>.dropdown-toggle:active {
+    pointer-events: none;
+}
+
+#navbarSupportedContent {
+    margin-left: 7%;
+    background: transparent;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.navbar-brand {
+    margin-left: 2%;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.logo {
+    margin-top: 5px;
+    width: 270px;   
+}
+
+.navbar {
+    opacity: 1;
+    color: black;
+    transition: 0.5s linear;
+    /* border-bottom: 2px solid #616161; */
+    height: 120px;
+    font-family: 'Montserrat', sans-serif;
+    box-shadow: none;
+    position: relative;
+    z-index: 1000;
+}
+
+#header-bars {
+    color: white;
+    width: 40px;
+    height: 40px;
+    font-size: 25px;
+border: 1px solid white;
+line-height: 35px;
+border-radius: 5px;
+}
+#header-bars:hover {
+ background: #dddddd;
+ color: grey;
+}
+
+.navbar:hover {
+    opacity: 1;
+}
+
+/* For the effects when the scrolling starts */
+
+html:not([data-scroll="0"]) body {
+    padding-top: 3em;
+}
+
+html:not([data-scroll="0"]) .navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    /* background-color: #fff; */
+    opacity: 1;
+    height: 110px;
+    box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.5);
+    transition: 0.4s linear;
+    background-color: rgb(36, 36, 36);
+    color: white;
+}
+
+/* For the effects when the scrolling starts */
+
+.t-none {
+    transition: none;
+}
+
+#navbarSupportedContent .navbar-nav .nav-item .nav-link {
+    color: white;
+    background: transparent;
+    text-align: center;
+    border: none;
+    font-weight: normal;
+    font-size: 13px;
+    margin-left: 10px;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
+#navbarSupportedContent .navbar-nav .nav-item .nav-link:hover {
+    font-weight: bold;
+    color: #d6ad34;
+    transition: none;
+    /* transition: 0.2s linear; */
+}
+
+.img-connect-meta {
+    border: 2px solid #666666;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+@media all and (max-width:1322px)
+{
+    #navbarSupportedContent {
+        margin-left: 4%;
+    }
+}
+@media all and (max-width:1282px)
+{
+    #navbarSupportedContent {
+        margin-left: 2%;
+    }
+}
+@media all and (max-width:1256px)
+{
+    .logo
+    {
+        width: 250px;
+    }
+}
+@media all and (max-width:1235px)
+{
+    .logo
+    {
+        width: 230px;
+        margin-left: -10%;
+    }
+    #navbarSupportedContent {
+        margin-left: 0%;
+    }
+}
+@media all and (max-width:1235px)
+{
+    .logo
+    {
+        width: 260px;
+        margin-left: initial;
+    }
+    #navbarSupportedContent {
+        margin-left: initial;
+    }
+}
+/* Media Queries */
+@media all and (max-width:600px) {
+    #navbarSupportedContent .navbar-nav .nav-item .nav-link:hover {
+        border: initial;
+        border-radius: initial;
+    }
+    #logo-text {
+        font-weight: 500;
+        font-size: 40px;
+        padding-left: 12%;
+        letter-spacing: 3px
+    }
+    #navbarSupportedContent {
+        margin-left: initial;
+        margin-top: 5%;
+        background: #9a771f;;
+        border: 1px solid grey;
+        border-radius: 3px;
+    }
+    html:not([data-scroll="0"]) #navbarSupportedContent {
+        background: #9a771f;
+        border: 1px solid grey;
+        color: white;
+        margin-top: 5%;
+        transition: 0.5s linear;
+    }
+    html:not([data-scroll="0"]) #navbarSupportedContent .navbar-nav .nav-item .nav-link {
+        color:white;
+        background: transparent;
+    }
+    #navbarSupportedContent .navbar-nav .nav-item .nav-link {
+        color: white;
+        background: transparent;
+        text-align: center;
+        border: none;
+        font-weight: normal;
+        font-size: 13px;
+        margin-left: 10px;
+        letter-spacing: 1px;
+        cursor: pointer;
+    }
+    
+}
+@media all and (max-width:400px)
+{
+    .logo{
+        width: 230px;
+    }
+}
+
+@media all and (max-width:355px)
+{
+    .logo{
+        width: 200px;
+    }
+}
+
+@media all and (max-width:330px)
+{
+    .logo{
+        width: 180px;
+    }
+}
+
+@media all and (max-width:305px)
+{
+    .logo{
+        width: 170px;
+    }
+}
+@media all and (max-width:292px)
+{
+    #header-bars {
+        width: 30px;
+        height: 30px;
+        font-size: 20px;
+    line-height: 30px;
+    border-radius: 5px;
+    }
+}
+@media all and (max-width:292px)
+{
+    #header-bars {
+       position: absolute;
+       right: 5%;
+       top: 40%;
+    }
+}
+
+
