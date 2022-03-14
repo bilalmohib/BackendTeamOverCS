@@ -10,7 +10,7 @@ import { Link, useHistory } from "react-router-dom"
 import '../../css/Admin.css';
 
 import firebase from "../../firebase/index";
-
+import 'firebase/firestore';
 import { storage } from '../../firebase/index';
 
 import { MDBProgress } from 'mdbreact';
