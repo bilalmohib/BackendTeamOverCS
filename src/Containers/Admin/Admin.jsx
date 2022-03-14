@@ -297,7 +297,7 @@ class Admin extends React.Component {
     sendDataBlog = () => {
         ////////////////////////////To take the current date and time//////////////////////////////////
         let today = new Date();
-        let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+        let date = (today.getMonth() + 1) + today.getDate() + ',' + today.getFullYear();
         let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
         let dateTime = date + ' ' + time;
         dateTime = dateTime.toString();
@@ -329,7 +329,7 @@ class Admin extends React.Component {
             FrontParaBlog: "",
             BlogAuthor: "",
             BlogHashTagsArray: [],
-            BlogFrontImageProgress:0
+            BlogFrontImageProgress: 0
         })
 
     }
@@ -593,10 +593,10 @@ class Admin extends React.Component {
                                                                 <h3>Enter the Google Map Link where the project is located : <span className="text-red">*</span></h3>
                                                                 <input type="text" placeholder="Eg: https://www.google.com/maps?ll=31.476852,74.449119&z=16&t=m&hl=en&gl=US&mapclient=embed&cid=17223166234116770493 etc" value={this.state.GoogleMapLink} onChange={(e) => this.setState({ GoogleMapLink: e.target.value })} className="form-control title" aria-label="..." />
                                                                 <br />
-                                                                <iframe id="mapAdmin" src={this.state.GoogleMapLink} allowFullScreen loading="lazy" />
+                                                                <iframe title='Map' id="mapAdmin" src={this.state.GoogleMapLink} allowFullScreen loading="lazy" />
                                                             </div>
 
-                                                            {(this.state.title == "" || this.state.category == "" || this.state.disc == "" || this.state.architects == "" || this.state.area == 0 || this.state.manufacturers == "" || this.state.StructuralEngineers == "" || this.state.LandscapeAchitects == "" || this.state.ProjectArchitects == "" || this.state.City == "" || this.state.Country == "" || this.state.GoogleMapLink == "" || this.state.ImageURLArray.length == 0) ? (
+                                                            {(this.state.title === "" || this.state.category === "" || this.state.disc === "" || this.state.architects == "" || this.state.area == 0 || this.state.manufacturers == "" || this.state.StructuralEngineers == "" || this.state.LandscapeAchitects == "" || this.state.ProjectArchitects == "" || this.state.City == "" || this.state.Country == "" || this.state.GoogleMapLink == "" || this.state.ImageURLArray.length == 0) ? (
                                                                 <div>
                                                                     <h4 className="text-red">Please fill all the fields indicated as necessary with * sign to submit</h4>
                                                                     <button disabled={true} className="btn btn-success btn-block">Submit</button>
@@ -693,7 +693,7 @@ class Admin extends React.Component {
                                                                             <div className="modal-footer">
                                                                                 <button type="button" className="btn btn-secondary" onClick={() => this.setState({ showInsertHeadingModal: false })} data-mdb-dismiss="modal">
                                                                                     Close
-                                                                             </button>
+                                                                                </button>
                                                                                 <button type="button" onClick={() => this.setState({
                                                                                     BlogDescription: this.state.BlogDescription + `<h1 class="text-dark text-bold">${this.state.TempHeadingsBlog}<h1>`,
                                                                                     TempHeadingsBlog: "",
@@ -703,7 +703,7 @@ class Admin extends React.Component {
                                                                                     aria-label="Insert"
                                                                                     className="btn btn-primary"
                                                                                 >Insert
-                                                                            </button>
+                                                                                </button>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -733,7 +733,7 @@ class Admin extends React.Component {
                                                                             <div className="modal-footer">
                                                                                 <button type="button" onClick={() => this.setState({ showInsertParagraphModal: false })} className="btn btn-secondary" data-mdb-dismiss="modal">
                                                                                     Close
-                                                                             </button>
+                                                                                </button>
                                                                                 <button type="button" onClick={() => this.setState({
                                                                                     BlogDescription: this.state.BlogDescription + `<p class="text-dark">${this.state.TempHeadingsBlog}<p>`,
                                                                                     TempHeadingsBlog: "",
@@ -743,7 +743,7 @@ class Admin extends React.Component {
                                                                                     aria-label="Insert"
                                                                                     className="btn btn-primary"
                                                                                 >Insert
-                                                                            </button>
+                                                                                </button>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -792,7 +792,7 @@ class Admin extends React.Component {
                                                                             <div className="modal-footer">
                                                                                 <button type="button" onClick={() => this.setState({ showInsertImageModal: false })} className="btn btn-secondary" data-mdb-dismiss="modal">
                                                                                     Close
-                                                                             </button>
+                                                                                </button>
                                                                                 {(this.state.TempBlogImageURL == "") ? (
                                                                                     <button type="button"
                                                                                         disabled={true}
@@ -864,6 +864,22 @@ class Admin extends React.Component {
                                                                         showInsertImageModal: true
                                                                     })}
                                                                 >Insert Image</button>
+
+                                                                <button
+                                                                    className='btn btn-danger'
+                                                                    onClick={() => {
+                                                                        this.setState({
+                                                                            BlogDescription: ""
+                                                                        })
+                                                                        alert("Content Removed Successfully.")
+                                                                    }
+
+                                                                    }
+
+                                                                    title="Will Remove All the written Code"
+                                                                >
+                                                                    Remove All (X)
+                                                                </button>
 
                                                             </div>
 
