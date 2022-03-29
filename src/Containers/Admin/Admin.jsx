@@ -311,7 +311,7 @@ class Admin extends React.Component {
             //Initializing the database varaible db
             const db = firebase.firestore();
             // Initializing the ref for blog submission to database
-            const blogDbReference = db.collection(`Data/Blogs/${this.state.signedInUserData.email}`);
+            const blogDbReference = db.collection(`Blogs/`);
 
             //The object format in which data will be stored
             let BlogDataObject = {
@@ -392,7 +392,7 @@ class Admin extends React.Component {
         var auth = firebase.auth();
         var emailAddress = "bilalmohib7896@gmail.com";
         auth.sendPasswordResetEmail(emailAddress).then(function () {
-            // alert(`A password reset email has been sent to ${emailAddress}.`)
+            // alert(`A password reset email has been sent to ${ emailAddress }.`)
         }).catch(function (error) {
             // An error happened.
             alert(error)
@@ -711,7 +711,7 @@ class Admin extends React.Component {
                                                                                     Close
                                                                                 </button>
                                                                                 <button type="button" onClick={() => this.setState({
-                                                                                    BlogDescription: this.state.BlogDescription + `<h1 class="text-dark text-bold">${this.state.TempHeadingsBlog}<h1>`,
+                                                                                    BlogDescription: this.state.BlogDescription + `< h1 class= "text-dark text-bold" > ${this.state.TempHeadingsBlog} < h1 > `,
                                                                                     TempHeadingsBlog: "",
                                                                                     showInsertHeadingModal: false
                                                                                 })}
@@ -751,7 +751,7 @@ class Admin extends React.Component {
                                                                                     Close
                                                                                 </button>
                                                                                 <button type="button" onClick={() => this.setState({
-                                                                                    BlogDescription: this.state.BlogDescription + `<p class="text-dark">${this.state.TempHeadingsBlog}<p>`,
+                                                                                    BlogDescription: this.state.BlogDescription + `< p class= "text-dark" > ${this.state.TempHeadingsBlog} < p > `,
                                                                                     TempHeadingsBlog: "",
                                                                                     showInsertParagraphModal: false
                                                                                 })}
@@ -817,7 +817,7 @@ class Admin extends React.Component {
                                                                                     </button>
                                                                                 ) : (
                                                                                     <button type="button" onClick={() => this.setState({
-                                                                                        BlogDescription: this.state.BlogDescription + `<img class="img-fluid" src="${this.state.TempBlogImageURL}" alt="${this.state.TempBlogImageALT}" title="${this.state.TempBlogImageTitle}" /> <br/>`,
+                                                                                        BlogDescription: this.state.BlogDescription + `< img class= "img-fluid" src = "${this.state.TempBlogImageURL}" alt = "${this.state.TempBlogImageALT}" title = "${this.state.TempBlogImageTitle}" /> <br />`,
                                                                                         TempHeadingsBlog: "",
                                                                                         showInsertImageModal: false,
                                                                                         TempBlogImageURL: "",
@@ -859,7 +859,7 @@ class Admin extends React.Component {
                                                                 <button
                                                                     className="btn btn-danger"
                                                                     onClick={() => this.setState({
-                                                                        BlogDescription: this.state.BlogDescription + `<br/>`
+                                                                        BlogDescription: this.state.BlogDescription + `< br /> `
                                                                     })}
                                                                 >Line Break</button>
 
@@ -956,7 +956,7 @@ class Admin extends React.Component {
                                                                     return <li key={i} style={{ display: "inline-block", listStyle: "none" }}>
                                                                         <div>
                                                                             {/* Here the loop div is here */}
-                                                                            <a href={`blog/${v}`} className="border ml-2 mt-2 hastagsBlog">{v}</a>
+                                                                            <a href={`blog / ${v}`} className="border ml-2 mt-2 hastagsBlog">{v}</a>
                                                                             {/* Here the loop div is here */}
                                                                         </div>
 
