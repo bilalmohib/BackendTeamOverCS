@@ -711,7 +711,7 @@ class Admin extends React.Component {
                                                                                     Close
                                                                                 </button>
                                                                                 <button type="button" onClick={() => this.setState({
-                                                                                    BlogDescription: this.state.BlogDescription + `< h1 class= "text-dark text-bold" > ${this.state.TempHeadingsBlog} < h1 > `,
+                                                                                    BlogDescription: this.state.BlogDescription + `<h1 class="text-dark text-bold">${this.state.TempHeadingsBlog}</h1>`,
                                                                                     TempHeadingsBlog: "",
                                                                                     showInsertHeadingModal: false
                                                                                 })}
@@ -751,7 +751,7 @@ class Admin extends React.Component {
                                                                                     Close
                                                                                 </button>
                                                                                 <button type="button" onClick={() => this.setState({
-                                                                                    BlogDescription: this.state.BlogDescription + `< p class= "text-dark" > ${this.state.TempHeadingsBlog} < p > `,
+                                                                                    BlogDescription: this.state.BlogDescription + `<p class="text-dark">${this.state.TempHeadingsBlog}</p>`,
                                                                                     TempHeadingsBlog: "",
                                                                                     showInsertParagraphModal: false
                                                                                 })}
@@ -809,7 +809,7 @@ class Admin extends React.Component {
                                                                                 <button type="button" onClick={() => this.setState({ showInsertImageModal: false })} className="btn btn-secondary" data-mdb-dismiss="modal">
                                                                                     Close
                                                                                 </button>
-                                                                                {(this.state.TempBlogImageURL == "") ? (
+                                                                                {(this.state.TempBlogImageURL === "") ? (
                                                                                     <button type="button"
                                                                                         disabled={true}
                                                                                         className="btn btn-primary"
