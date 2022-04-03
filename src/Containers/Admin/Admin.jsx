@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from "../../Components/Navbar";
 import Footer from "../../Components/Footer";
+import Loader from "../../Components/Loader";
 
 import DatePicker from 'react-date-picker';
 
@@ -69,7 +70,8 @@ class Admin extends React.Component {
             TempBlogImageTitle: "",
             //Signed In user data
             signedInUserData: null,
-            blogloader:false
+            blogloader: false,
+            projectloader: false
             //Blog Inside Image
             //For images
             ///////////////////////////////////Here the Blog states start/////////////////////////////////////////////////
@@ -234,6 +236,10 @@ class Admin extends React.Component {
     }
 
     sendDataProject = () => {
+        this.setState({
+            projectloader: true
+        })
+
         ////////////////////////////To take the current date and time//////////////////////////////////
         let today = new Date();
         let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
@@ -292,7 +298,8 @@ class Admin extends React.Component {
             // Here the important attributes start
             ImageURLArray: [],
             progress: 0,
-            filesArray: []
+            filesArray: [],
+            projectloader: false
         })
 
         this.globalImageURLArray = [];
@@ -301,6 +308,9 @@ class Admin extends React.Component {
 
     sendDataBlog = () => {
         if (this.state.status != null) {
+            this.setState({
+                blogloader: true
+            })
             ////////////////////////////To take the current date and time//////////////////////////////////
             let today = new Date();
             let date = (today.getMonth() + 1) + today.getDate() + ',' + today.getFullYear();
@@ -343,7 +353,8 @@ class Admin extends React.Component {
                     FrontParaBlog: "",
                     BlogAuthor: "",
                     BlogHashTagsArray: [],
-                    BlogFrontImageProgress: 0
+                    BlogFrontImageProgress: 0,
+                    blogloader: false
                 })
             })
 
@@ -461,7 +472,7 @@ class Admin extends React.Component {
                                         <div className="container border">
                                             <button type="button" className="btn btn-primary btn-rounded btnAddNewProject mt-3">Add New Project</button>
                                             <br /><br />
-                                            {(true) ? (
+                                            {(this.state.projectloader == false) ? (
                                                 <div>
                                                     <div className="container admin-container">
                                                         {/* Here the game starts */}
@@ -639,7 +650,7 @@ class Admin extends React.Component {
                                                 </div>
                                             ) : (
                                                 <div>
-
+                                                    <Loader text={"Please wait sending the data to the database......"} />
                                                 </div>
                                             )}
                                         </div>
@@ -648,24 +659,13 @@ class Admin extends React.Component {
                                         <div className="container border">
                                             <button type="button" className="btn btn-warning btn-rounded btnAddNewProject mt-3">Add New Blog</button>
                                             <br /><br />
-                                            {(true) ? (
+                                            {(this.state.blogloader === false) ? (
                                                 <div>
                                                     <div className="container admin-container">
                                                         {/* Here the game starts */}
                                                         <div>
                                                             <h1 className="text-inverse mt-3">Upload a Blog : -</h1>
                                                             <br />
-                                                            {/* ///////////////////////////////////Here the Blog states start/////////////////////////////////////////////////
-            BlogTitle:"",
-            BlogCategory:"",
-            BlogDescription:"",
-            //For images
-            BlogFrontImageURL:"",
-            BlogFrontImage:null,
-            BlogFrontImageProgress:0,
-            BlogAuthor:""
-            //For images
-            ///////////////////////////////////Here the Blog states start///////////////////////////////////////////////// */}
 
                                                             <div>
                                                                 <h3>Enter the Title of the Blog : <span className="text-red">*</span></h3>
@@ -712,7 +712,7 @@ class Admin extends React.Component {
                                                                                     Close
                                                                                 </button>
                                                                                 <button type="button" onClick={() => this.setState({
-                                                                                    BlogDescription: this.state.BlogDescription + `<h1 class="text-dark text-bold">${this.state.TempHeadingsBlog}</h1>`,
+                                                                                    BlogDescription: this.state.BlogDescription + `<h1 className="text-dark text-bold">${this.state.TempHeadingsBlog}</h1>`,
                                                                                     TempHeadingsBlog: "",
                                                                                     showInsertHeadingModal: false
                                                                                 })}
@@ -752,7 +752,7 @@ class Admin extends React.Component {
                                                                                     Close
                                                                                 </button>
                                                                                 <button type="button" onClick={() => this.setState({
-                                                                                    BlogDescription: this.state.BlogDescription + `<p class="text-dark">${this.state.TempHeadingsBlog}</p>`,
+                                                                                    BlogDescription: this.state.BlogDescription + `<p className="text-dark">${this.state.TempHeadingsBlog}</p>`,
                                                                                     TempHeadingsBlog: "",
                                                                                     showInsertParagraphModal: false
                                                                                 })}
@@ -818,7 +818,7 @@ class Admin extends React.Component {
                                                                                     </button>
                                                                                 ) : (
                                                                                     <button type="button" onClick={() => this.setState({
-                                                                                        BlogDescription: this.state.BlogDescription + `<img class="img-fluid" src="${this.state.TempBlogImageURL}" alt="${this.state.TempBlogImageALT}" title="${this.state.TempBlogImageTitle}" /> <br />`,
+                                                                                        BlogDescription: this.state.BlogDescription + `<img className="img-fluid" src="${this.state.TempBlogImageURL}" alt="${this.state.TempBlogImageALT}" title="${this.state.TempBlogImageTitle}" /> <br />`,
                                                                                         TempHeadingsBlog: "",
                                                                                         showInsertImageModal: false,
                                                                                         TempBlogImageURL: "",
@@ -995,7 +995,7 @@ class Admin extends React.Component {
                                                 </div>
                                             ) : (
                                                 <div>
-
+                                                    <Loader text={"Please wait sending the data to the database......"} />
                                                 </div>
                                             )}
                                         </div>
