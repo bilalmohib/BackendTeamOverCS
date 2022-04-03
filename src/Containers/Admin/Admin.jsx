@@ -859,7 +859,7 @@ class Admin extends React.Component {
                                                                 <button
                                                                     className="btn btn-danger"
                                                                     onClick={() => this.setState({
-                                                                        BlogDescription: this.state.BlogDescription + `< br /> `
+                                                                        BlogDescription: this.state.BlogDescription + `<br />`
                                                                     })}
                                                                 >Line Break</button>
 
@@ -956,7 +956,7 @@ class Admin extends React.Component {
                                                                     return <li key={i} style={{ display: "inline-block", listStyle: "none" }}>
                                                                         <div>
                                                                             {/* Here the loop div is here */}
-                                                                            <a href={`blog / ${v}`} className="border ml-2 mt-2 hastagsBlog">{v}</a>
+                                                                            <a href={`blog/${v}`} className="border ml-2 mt-2 hastagsBlog">{v}</a>
                                                                             {/* Here the loop div is here */}
                                                                         </div>
 
