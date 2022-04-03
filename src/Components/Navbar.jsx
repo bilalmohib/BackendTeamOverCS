@@ -74,9 +74,9 @@ const Navbar = (props) => {
                             {/* Left links */}
                             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li className="nav-item">
-                                    <Link to="/" className="nav-link active t-none">HOME</Link>
+                                    <Link to="/admin" className="nav-link active t-none">ADMIN</Link>
                                 </li>
-                                <li className="nav-item">
+                                {/* <li className="nav-item">
                                     <Link to="/about" className="nav-link t-none">ABOUT</Link>
                                 </li>
                                 <li className="nav-item">
@@ -93,7 +93,7 @@ const Navbar = (props) => {
                                 </li>
                                 <li className="nav-item">
                                     <Link to="/cp" className="nav-link t-none">COMPANY PROFILE</Link>
-                                </li>
+                                </li> */}
                             </ul>
                             {/* Left links */}
                         </div>
@@ -121,9 +121,9 @@ const Navbar = (props) => {
                             {/* Left links */}
                             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li className="nav-item">
-                                    <Link to="/" className="nav-link active t-none">HOME</Link>
+                                    <Link to="/admin" style={{fontSize:"20px"}} className="nav-link active t-none">ADMIN PANEL</Link>
                                 </li>
-                                <li className="nav-item">
+                                {/* <li className="nav-item">
                                     <Link to="/about" className="nav-link t-none">ABOUT</Link>
                                 </li>
                                 <li className="nav-item">
@@ -140,7 +140,7 @@ const Navbar = (props) => {
                                 </li>
                                 <li className="nav-item">
                                     <Link to="/blog" className="nav-link t-none">BLOG</Link>
-                                </li>
+                                </li> */}
                             </ul>
                             {/* Left links */}
                         </div>

@@ -68,7 +68,8 @@ class Admin extends React.Component {
             BlogTempImageProgress: 0,
             TempBlogImageTitle: "",
             //Signed In user data
-            signedInUserData: null
+            signedInUserData: null,
+            blogloader:false
             //Blog Inside Image
             //For images
             ///////////////////////////////////Here the Blog states start/////////////////////////////////////////////////
@@ -817,7 +818,7 @@ class Admin extends React.Component {
                                                                                     </button>
                                                                                 ) : (
                                                                                     <button type="button" onClick={() => this.setState({
-                                                                                        BlogDescription: this.state.BlogDescription + `< img class= "img-fluid" src = "${this.state.TempBlogImageURL}" alt = "${this.state.TempBlogImageALT}" title = "${this.state.TempBlogImageTitle}" /> <br />`,
+                                                                                        BlogDescription: this.state.BlogDescription + `<img class="img-fluid" src="${this.state.TempBlogImageURL}" alt="${this.state.TempBlogImageALT}" title="${this.state.TempBlogImageTitle}" /> <br />`,
                                                                                         TempHeadingsBlog: "",
                                                                                         showInsertImageModal: false,
                                                                                         TempBlogImageURL: "",
@@ -1036,7 +1037,7 @@ class Admin extends React.Component {
                 <br />
                 <Footer />
                 {/* Projects section */}
-            </div >
+            </div>
         )
     }
 }
