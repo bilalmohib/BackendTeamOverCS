@@ -100,7 +100,7 @@ class Admin extends React.Component {
     }
 
     componentDidUpdate = () => {
-        console.log("Idhar dekh aik chez cdu mein ==>", this.state.BlogHashTagsArray);
+        console.log("List of Hashtag Blogs is here ==>", this.state.BlogHashTagsArray);
     }
 
     setProjectCategoryFunction = (e) => {
@@ -306,11 +306,18 @@ class Admin extends React.Component {
 
     }
 
+    enableTheBlog = () => {
+        this.setState({
+            blogloader: true
+        })
+    }
+
     sendDataBlog = () => {
         if (this.state.status != null) {
-            this.setState({
-                blogloader: true
-            })
+            // this.setState({
+            //     blogloader: true
+            // })
+            // this.enableTheBlog();
             ////////////////////////////To take the current date and time//////////////////////////////////
             let today = new Date();
             let date = (today.getMonth() + 1) + today.getDate() + ',' + today.getFullYear();
@@ -346,6 +353,7 @@ class Admin extends React.Component {
                 //Clear the states
                 this.setState({
                     // Here the attributes start for the blog
+                    blogloader: false,
                     BlogTitle: "",
                     BlogCategory: "",
                     BlogDescription: "",
@@ -353,8 +361,7 @@ class Admin extends React.Component {
                     FrontParaBlog: "",
                     BlogAuthor: "",
                     BlogHashTagsArray: [],
-                    BlogFrontImageProgress: 0,
-                    blogloader: false
+                    BlogFrontImageProgress: 0
                 })
             })
 
