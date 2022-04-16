@@ -318,6 +318,7 @@ class Admin extends React.Component {
             //     blogloader: true
             // })
             // this.enableTheBlog();
+            alert("Please wait submitting the blog data.");
             ////////////////////////////To take the current date and time//////////////////////////////////
             let today = new Date();
             let date = (today.getMonth() + 1) + today.getDate() + ',' + today.getFullYear();
