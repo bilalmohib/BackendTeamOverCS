@@ -34,10 +34,12 @@ class Admin extends React.Component {
             architects: "",
             area: 0,
             completionDate: currentDate,
-            manufacturers: "",
             StructuralEngineers: "",
             LandscapeAchitects: "",
             ProjectArchitects: "",
+            builderAchitects: "",
+            photographyAchitects: "",
+            interiorArchitects: "",
             City: "",
             Country: "",
             GoogleMapLink: "",
@@ -265,7 +267,6 @@ class Admin extends React.Component {
             Architects: this.state.architects,
             Area: this.state.area,
             CompletionDate: completionDate,
-            Manufacturers: this.state.manufacturers,
             StructuralEngineers: this.state.StructuralEngineers,
             LandscapeAchitects: this.state.LandscapeAchitects,
             ProjectArchitects: this.state.ProjectArchitects,
@@ -288,7 +289,6 @@ class Admin extends React.Component {
             architects: "",
             area: 0,
             completionDate: new Date(),
-            manufacturers: "",
             StructuralEngineers: "",
             LandscapeAchitects: "",
             ProjectArchitects: "",
@@ -540,7 +540,6 @@ class Admin extends React.Component {
                                                                                         <img width={250} height={250} className="border ml-2 mt-2" src={v} alt={i} />
                                                                                         {/* Here the loop div is here */}
                                                                                     </div>
-
                                                                                 </li>
                                                                             })}
                                                                         </div>
@@ -552,8 +551,36 @@ class Admin extends React.Component {
                                                             <br />
 
                                                             <div>
-                                                                <h3>Enter the Architects of the project : <span className="text-red">*</span></h3>
+                                                                <h3>Enter the Architectural team for the project : <span className="text-red">*</span></h3>
                                                                 <input type="text" placeholder="Eg: Philip Stejskal Architecture,Ali Imran etc" value={this.state.architects} onChange={(e) => this.setState({ architects: e.target.value })} className="form-control title" aria-label="..." />
+                                                            </div>
+
+                                                            <br />
+
+                                                            <div>
+                                                                <h3>Enter the Interiors team for the project : <span className="text-red">*</span></h3>
+                                                                <input type="text" placeholder="Eg: Brian Brady etc" value={this.state.interiorsArchitects} onChange={(e) => this.setState({ interiorsArchitects: e.target.value })} className="form-control title" aria-label="..." />
+                                                            </div>
+
+                                                            <br />
+
+                                                            <div>
+                                                                <h3>Enter the Landscape Architects of the project : <span className="text-red">*</span></h3>
+                                                                <input type="text" placeholder="Eg: Annghi Tran Landscape Architecture Studio etc" value={this.state.LandscapeAchitects} onChange={(e) => this.setState({ LandscapeAchitects: e.target.value })} className="form-control title" aria-label="..." />
+                                                            </div>
+
+                                                            <br />
+
+                                                            <div>
+                                                                <h3>Enter the Builders of the project : <span className="text-red">*</span></h3>
+                                                                <input type="text" placeholder="Eg: Annghi Tran Landscape Architecture Studio etc" value={this.state.builderAchitects} onChange={(e) => this.setState({ builderAchitects: e.target.value })} className="form-control title" aria-label="..." />
+                                                            </div>
+
+                                                            <br />
+
+                                                            <div>
+                                                                <h3>Photography by : <span className="text-red">*</span></h3>
+                                                                <input type="text" placeholder="Eg: Joshua McHugh etc" value={this.state.photographyAchitects} onChange={(e) => this.setState({ photographyAchitects: e.target.value })} className="form-control title" aria-label="..." />
                                                             </div>
 
                                                             <br />
@@ -578,22 +605,8 @@ class Admin extends React.Component {
                                                             <br />
 
                                                             <div>
-                                                                <h3>Enter the Manufacturers of the project : <span className="text-red">*</span></h3>
-                                                                <input type="text" placeholder="Eg: Midland Brick,Barestone, CSR Gyprock, Fielders Prominence etc" value={this.state.manufacturers} onChange={(e) => this.setState({ manufacturers: e.target.value })} className="form-control title" aria-label="..." />
-                                                            </div>
-
-                                                            <br />
-
-                                                            <div>
                                                                 <h3>Enter the Structural Engineers of the project : <span className="text-red">*</span></h3>
                                                                 <input type="text" placeholder="Eg: Andreotta Cardenosa Consulting Engineers etc" value={this.state.StructuralEngineers} onChange={(e) => this.setState({ StructuralEngineers: e.target.value })} className="form-control title" aria-label="..." />
-                                                            </div>
-
-                                                            <br />
-
-                                                            <div>
-                                                                <h3>Enter the Landscape Architects of the project : <span className="text-red">*</span></h3>
-                                                                <input type="text" placeholder="Eg: Annghi Tran Landscape Architecture Studio etc" value={this.state.LandscapeAchitects} onChange={(e) => this.setState({ LandscapeAchitects: e.target.value })} className="form-control title" aria-label="..." />
                                                             </div>
 
                                                             <br />
@@ -626,7 +639,7 @@ class Admin extends React.Component {
                                                                 <iframe title='Map' id="mapAdmin" src={this.state.GoogleMapLink} allowFullScreen loading="lazy" />
                                                             </div>
 
-                                                            {(this.state.title === "" || this.state.category === "" || this.state.disc === "" || this.state.architects == "" || this.state.area == 0 || this.state.manufacturers == "" || this.state.StructuralEngineers == "" || this.state.LandscapeAchitects == "" || this.state.ProjectArchitects == "" || this.state.City == "" || this.state.Country == "" || this.state.GoogleMapLink == "" || this.state.ImageURLArray.length == 0) ? (
+                                                            {(this.state.title === "" || this.state.category === "" || this.state.disc === "" || this.state.architects == "" || this.state.area == 0 || this.state.StructuralEngineers == "" || this.state.LandscapeAchitects == "" || this.state.ProjectArchitects == "" || this.state.City == "" || this.state.Country == "" || this.state.GoogleMapLink == "" || this.state.ImageURLArray.length == 0) ? (
                                                                 <div>
                                                                     <h4 className="text-red">Please fill all the fields indicated as necessary with * sign to submit</h4>
                                                                     <button disabled={true} className="btn btn-success btn-block">Submit</button>
