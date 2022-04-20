@@ -1,18 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-import { connect } from "react-redux";
-import { setTodoList } from '.././store/action/index';
-
 import logo from "../assets/logo1.png";
 
-import { Link, useHistory } from "react-router-dom"
+import {Link} from "react-router-dom";
+
 import '../Styling/Navbar.css';
 
 const Navbar = (props) => {
-    const history = useHistory();
-    const handleRowClick = (e) => {
-        history.push(`/${e}`);
-    }
 
     useEffect(() => {
         // The debounce function receives our function as a parameter

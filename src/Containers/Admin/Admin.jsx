@@ -437,13 +437,7 @@ class Admin extends React.Component {
                 <br />
                 <br />
 
-                <div className="container">
-                    <div className="linkingPD">
-                        <Link to="/">Home</Link>
-                        <i className="fas fa-angle-right text-gray ml-3 mr-2"></i> <Link to="/admin">Admin</Link>
-                    </div>
-                    <h1 className="projectTitlepd">Admin Panel</h1>
-                </div>
+
 
                 {(firebase.auth().currentUser == null) ? (
                     <div>
