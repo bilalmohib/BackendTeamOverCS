@@ -274,13 +274,12 @@ class Admin extends React.Component {
 
     sendDataProject = () => {
 
-        alert("Submitting your project.Please wait for atleast 5 seconds.......")
+        // alert("Submitting your project.Please wait for atleast 5 seconds.......")
 
         //Initializing the database varaible db
         const db = firebase.firestore();
         // Initializing the ref for blog submission to database
         const projectsDbReference = db.collection(`Projects/`);
-
 
         ////////////////////////////To take the current date and time//////////////////////////////////
         let today = new Date();
@@ -521,7 +520,28 @@ class Admin extends React.Component {
                 <br />
                 <br />
 
-
+                {/* MODAL */}
+                <div className="modal fade" id="exampleModal" tabIndex={-1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title" id="exampleModalLabel">Project Submission</h5>
+                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div className="modal-body">
+                                <div className="text-info">
+                                    <h1>Please wait for 5 seconds atleast.We are saving your project to cloud.Thanks!</h1>
+                                </div>
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-primary">Acknowledged.</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {/* MODAL */}
 
                 {(firebase.auth().currentUser == null) ? (
                     <div>
