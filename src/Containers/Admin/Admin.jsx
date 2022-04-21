@@ -104,7 +104,22 @@ class Admin extends React.Component {
     }
 
     componentDidUpdate = () => {
-        console.log("List of Hashtag Blogs is here ==>", this.state.BlogHashTagsArray);
+        console.log("Title is : ", this.state.title)
+        console.log("Project Sector is : ", this.state.projectSector);
+        console.log("Project Service is : ", this.state.projectService);
+        console.log("Description is : ", this.state.disc);
+        console.log("Architects is : ", this.state.architects)
+        console.log("Area is : ", this.state.area)
+        console.log("Structural Engineers are : ", this.state.StructuralEngineers)
+        console.log("Landscape Architects are : ", this.state.LandscapeArchitects)
+        console.log("City is : ", this.state.City)
+        console.log("Country is : ", this.state.Country)
+        console.log("Google Map Link is : ", this.state.GoogleMapLink)
+        console.log("ImageURLArray is : ", this.state.ImageURLArray)
+        console.log("ProjectArchitects is : ", this.state.ProjectArchitects)
+        console.log("InteriorArchitects is : ", this.state.interiorArchitects)
+        console.log("BuilderArchitects is : ", this.state.builderArchitects)
+        console.log("PhotographyPersons is : ", this.state.photographyPersons)
     }
 
     setProjectCategoryFunction = (e) => {
@@ -528,7 +543,7 @@ class Admin extends React.Component {
 
                                                                 <span className="input-group-addon glyphicon glyphicon-search" id="sizing-addon2"></span>
 
-                                                                <select style={{ fontSize: "15px", width: "200px" }} value={this.state.category}
+                                                                <select style={{ fontSize: "15px", width: "200px" }} value={this.state.projectSector}
                                                                     onChange={(e) => this.setProjectSectorFunction(e)} className="form-control">
                                                                     <option value="Residential">Residential</option>
                                                                     <option value="Commercial">Commercial</option>
@@ -545,7 +560,7 @@ class Admin extends React.Component {
 
                                                                 <span className="input-group-addon glyphicon glyphicon-search" id="sizing-addon2"></span>
 
-                                                                <select style={{ fontSize: "15px", width: "200px" }} value={this.state.category}
+                                                                <select style={{ fontSize: "15px", width: "200px" }} value={this.state.projectService}
                                                                     onChange={(e) => this.setProjectServiceFunction(e)} className="form-control">
                                                                     <option value="Architectural">Architectural</option>
                                                                     <option value="Interior">Interior</option>
@@ -607,7 +622,7 @@ class Admin extends React.Component {
 
                                                             <div>
                                                                 <h3>Enter the Interiors team for the project : <span className="text-red">*</span></h3>
-                                                                <input type="text" placeholder="Eg: Brian Brady etc" value={this.state.interiorsArchitects} onChange={(e) => this.setState({ interiorsArchitects: e.target.value })} className="form-control title" aria-label="..." />
+                                                                <input type="text" placeholder="Eg: Brian Brady etc" value={this.state.interiorArchitects} onChange={(e) => this.setState({ interiorArchitects: e.target.value })} className="form-control title" aria-label="..." />
                                                             </div>
 
                                                             <br />
@@ -686,14 +701,50 @@ class Admin extends React.Component {
                                                                 <br />
                                                                 <iframe title='Map' id="mapAdmin" src={this.state.GoogleMapLink} allowFullScreen loading="lazy" />
                                                             </div>
-                                                            ProjectSector: this.state.projectSector,
-            {/* ProjectService: this.state.projectService,
-            ArchitecturalTeam: this.state.ProjectArchitects,
-            InteriorPersons: this.state.interiorArchitects,
-            LandscapePersons: this.state.LandscapeArchitects,
-            BuilderArchitects: this.state.builderArchitects,
-            PhotographyPersons: this.state.photographyPersons */}
-                                                            {(this.state.title === "" || this.state.category === "" || this.state.disc === "" || this.state.architects == "" || this.state.area == 0 || this.state.StructuralEngineers == "" || this.state.LandscapeArchitects == "" || this.state.City == "" || this.state.Country == "" || this.state.GoogleMapLink == "" || this.state.ImageURLArray.length == 0) ? (
+
+                                                            {/* ProjectSector: this.state.projectSector, */}
+                                                            {/* ProjectService: this.state.projectService,
+                                                                ArchitecturalTeam: this.state.ProjectArchitects,
+                                                                InteriorPersons: this.state.interiorArchitects,
+                                                                LandscapePersons: this.state.LandscapeArchitects,
+                                                                BuilderArchitects: this.state.builderArchitects,
+                                                                PhotographyPersons: this.state.photographyPersons */}
+
+                                                            {(
+                                                                this.state.title === ""
+                                                                ||
+                                                                this.state.projectSector == ""
+                                                                ||
+                                                                this.state.projectService === ""
+                                                                ||
+                                                                this.state.disc === ""
+                                                                ||
+                                                                this.state.architects == ""
+                                                                ||
+                                                                this.state.area == 0
+                                                                ||
+                                                                this.state.StructuralEngineers == ""
+                                                                ||
+                                                                this.state.LandscapeArchitects == ""
+                                                                ||
+                                                                this.state.City == ""
+                                                                ||
+                                                                this.state.Country == ""
+                                                                ||
+                                                                this.state.GoogleMapLink == ""
+                                                                ||
+                                                                this.state.ImageURLArray.length == 0
+                                                                ||
+                                                                this.state.projectService == ""
+                                                                ||
+                                                                this.state.ProjectArchitects == ""
+                                                                ||
+                                                                this.state.interiorArchitects == ""
+                                                                ||
+                                                                this.state.builderArchitects == ""
+                                                                ||
+                                                                this.state.photographyPersons == ""
+                                                            ) ? (
                                                                 <div>
                                                                     <h4 className="text-red">Please fill all the fields indicated as necessary with * sign to submit</h4>
                                                                     <button disabled={true} className="btn btn-success btn-block">Submit</button>
