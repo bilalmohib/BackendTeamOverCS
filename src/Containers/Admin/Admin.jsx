@@ -35,10 +35,12 @@ class Admin extends React.Component {
             area: 0,
             completionDate: currentDate,
             StructuralEngineers: "",
-            LandscapeAchitects: "",
+            projectSector: "",
+            projectService: "",
+            LandscapeArchitects: "",
             ProjectArchitects: "",
-            builderAchitects: "",
-            photographyAchitects: "",
+            builderArchitects: "",
+            photographyPersons: "",
             interiorArchitects: "",
             City: "",
             Country: "",
@@ -111,6 +113,24 @@ class Admin extends React.Component {
         // setCategory(selectCategory);
         this.setState({
             category: selectCategory
+        })
+    }
+
+    setProjectSectorFunction = (e) => {
+        let selectSector = e.target.value
+        alert(`${selectSector} is the Category you selected`);
+        // setSector(selectSector);
+        this.setState({
+            projectSector: selectSector
+        })
+    }
+
+    setProjectServiceFunction = (e) => {
+        let selectService = e.target.value
+        alert(`${selectService} is the Category you selected`);
+        // setSector(selectService);
+        this.setState({
+            projectService: selectService
         })
     }
 
@@ -268,13 +288,20 @@ class Admin extends React.Component {
             Area: this.state.area,
             CompletionDate: completionDate,
             StructuralEngineers: this.state.StructuralEngineers,
-            LandscapeAchitects: this.state.LandscapeAchitects,
-            ProjectArchitects: this.state.ProjectArchitects,
+            LandscapeArchitects: this.state.LandscapeArchitects,
             City: this.state.City,
             Country: this.state.Country,
             GoogleMapLink: this.state.GoogleMapLink,
             Key: key,
-            timeSubmitted: dateTime
+            timeSubmitted: dateTime,
+            //New entities
+            ProjectSector: this.state.projectSector,
+            ProjectService: this.state.projectService,
+            ArchitecturalTeam: this.state.ProjectArchitects,
+            InteriorPersons: this.state.interiorArchitects,
+            LandscapePersons: this.state.LandscapeArchitects,
+            BuilderArchitects: this.state.builderArchitects,
+            PhotographyPersons: this.state.photographyPersons
         }
 
 
@@ -290,8 +317,7 @@ class Admin extends React.Component {
             area: 0,
             completionDate: new Date(),
             StructuralEngineers: "",
-            LandscapeAchitects: "",
-            ProjectArchitects: "",
+            LandscapeArchitects: "",
             City: "",
             Country: "",
             GoogleMapLink: "",
@@ -299,7 +325,14 @@ class Admin extends React.Component {
             ImageURLArray: [],
             progress: 0,
             filesArray: [],
-            projectloader: false
+            projectloader: false,
+            ProjectSector: "",
+            ProjectService: "",
+            ArchitecturalTeam: "",
+            InteriorPersons: "",
+            LandscapePersons: "",
+            BuilderArchitects: "",
+            PhotographyPersons: ""
         })
 
         this.globalImageURLArray = [];
@@ -489,24 +522,39 @@ class Admin extends React.Component {
 
                                                             <br />
 
-                                                            <h3>Select A Category <span className="text-red">*</span></h3>
+                                                            <h3>Select A Sector for the Project <span className="text-red">*</span></h3>
 
                                                             <div className="input-group input-group-md category_select">
 
                                                                 <span className="input-group-addon glyphicon glyphicon-search" id="sizing-addon2"></span>
 
                                                                 <select style={{ fontSize: "15px", width: "200px" }} value={this.state.category}
-                                                                    onChange={(e) => this.setProjectCategoryFunction(e)} className="form-control">
-                                                                    <option value="Commercial Exterior">Commercial Exterior</option>
-                                                                    <option value="Commercial Interior">Commercial Interior</option>
-                                                                    <option value="Residential Exterior">Residential Exterior</option>
-                                                                    <option value="Residential Interior">Residential Interior</option>
+                                                                    onChange={(e) => this.setProjectSectorFunction(e)} className="form-control">
+                                                                    <option value="Residential">Residential</option>
+                                                                    <option value="Commercial">Commercial</option>
+                                                                    <option value="Public Building">Public Building</option>
+                                                                    <option value="Farm House">Farm House</option>
                                                                 </select>
                                                             </div>
+
                                                             <br />
 
+                                                            <h3>Select A Service for the Project <span className="text-red">*</span></h3>
 
+                                                            <div className="input-group input-group-md category_select">
 
+                                                                <span className="input-group-addon glyphicon glyphicon-search" id="sizing-addon2"></span>
+
+                                                                <select style={{ fontSize: "15px", width: "200px" }} value={this.state.category}
+                                                                    onChange={(e) => this.setProjectServiceFunction(e)} className="form-control">
+                                                                    <option value="Architectural">Architectural</option>
+                                                                    <option value="Interior">Interior</option>
+                                                                    <option value="Landscaping">Landscaping</option>
+                                                                    <option value="Construction">Construction</option>
+                                                                </select>
+                                                            </div>
+
+                                                            <br />
 
                                                             <h3>Enter the description of the project. <span className="text-red">*</span></h3>
 
@@ -566,21 +614,21 @@ class Admin extends React.Component {
 
                                                             <div>
                                                                 <h3>Enter the Landscape Architects of the project : <span className="text-red">*</span></h3>
-                                                                <input type="text" placeholder="Eg: Annghi Tran Landscape Architecture Studio etc" value={this.state.LandscapeAchitects} onChange={(e) => this.setState({ LandscapeAchitects: e.target.value })} className="form-control title" aria-label="..." />
+                                                                <input type="text" placeholder="Eg: Annghi Tran Landscape Architecture Studio etc" value={this.state.LandscapeArchitects} onChange={(e) => this.setState({ LandscapeArchitects: e.target.value })} className="form-control title" aria-label="..." />
                                                             </div>
 
                                                             <br />
 
                                                             <div>
                                                                 <h3>Enter the Builders of the project : <span className="text-red">*</span></h3>
-                                                                <input type="text" placeholder="Eg: Annghi Tran Landscape Architecture Studio etc" value={this.state.builderAchitects} onChange={(e) => this.setState({ builderAchitects: e.target.value })} className="form-control title" aria-label="..." />
+                                                                <input type="text" placeholder="Eg: Annghi Tran Landscape Architecture Studio etc" value={this.state.builderArchitects} onChange={(e) => this.setState({ builderArchitects: e.target.value })} className="form-control title" aria-label="..." />
                                                             </div>
 
                                                             <br />
 
                                                             <div>
                                                                 <h3>Photography by : <span className="text-red">*</span></h3>
-                                                                <input type="text" placeholder="Eg: Joshua McHugh etc" value={this.state.photographyAchitects} onChange={(e) => this.setState({ photographyAchitects: e.target.value })} className="form-control title" aria-label="..." />
+                                                                <input type="text" placeholder="Eg: Joshua McHugh etc" value={this.state.photographyPersons} onChange={(e) => this.setState({ photographyPersons: e.target.value })} className="form-control title" aria-label="..." />
                                                             </div>
 
                                                             <br />
@@ -638,8 +686,14 @@ class Admin extends React.Component {
                                                                 <br />
                                                                 <iframe title='Map' id="mapAdmin" src={this.state.GoogleMapLink} allowFullScreen loading="lazy" />
                                                             </div>
-
-                                                            {(this.state.title === "" || this.state.category === "" || this.state.disc === "" || this.state.architects == "" || this.state.area == 0 || this.state.StructuralEngineers == "" || this.state.LandscapeAchitects == "" || this.state.ProjectArchitects == "" || this.state.City == "" || this.state.Country == "" || this.state.GoogleMapLink == "" || this.state.ImageURLArray.length == 0) ? (
+                                                            ProjectSector: this.state.projectSector,
+            {/* ProjectService: this.state.projectService,
+            ArchitecturalTeam: this.state.ProjectArchitects,
+            InteriorPersons: this.state.interiorArchitects,
+            LandscapePersons: this.state.LandscapeArchitects,
+            BuilderArchitects: this.state.builderArchitects,
+            PhotographyPersons: this.state.photographyPersons */}
+                                                            {(this.state.title === "" || this.state.category === "" || this.state.disc === "" || this.state.architects == "" || this.state.area == 0 || this.state.StructuralEngineers == "" || this.state.LandscapeArchitects == "" || this.state.City == "" || this.state.Country == "" || this.state.GoogleMapLink == "" || this.state.ImageURLArray.length == 0) ? (
                                                                 <div>
                                                                     <h4 className="text-red">Please fill all the fields indicated as necessary with * sign to submit</h4>
                                                                     <button disabled={true} className="btn btn-success btn-block">Submit</button>
