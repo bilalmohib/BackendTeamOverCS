@@ -273,9 +273,14 @@ class Admin extends React.Component {
     }
 
     sendDataProject = () => {
-        this.setState({
-            projectloader: true
-        })
+
+        alert("Submitting your project.Please wait for atleast 5 seconds.......")
+
+        //Initializing the database varaible db
+        const db = firebase.firestore();
+        // Initializing the ref for blog submission to database
+        const projectsDbReference = db.collection(`Projects/`);
+
 
         ////////////////////////////To take the current date and time//////////////////////////////////
         let today = new Date();
@@ -294,7 +299,7 @@ class Admin extends React.Component {
 
         let key = firebase.database().ref('Projects/').push().key;
 
-        let Data = {
+        let projectDataObject = {
             Title: this.state.title,
             Category: this.state.category,
             Description: this.state.disc,
@@ -319,9 +324,40 @@ class Admin extends React.Component {
             PhotographyPersons: this.state.photographyPersons
         }
 
+        console.log("Project Data Object is ========> ", projectDataObject)
 
-        firebase.database().ref(`Projects/`).push(Data)
-            .then(alert("Your Project is Submitted Successfully."))
+        projectsDbReference.add(projectDataObject).then(() => {
+            //Here when the data is sent successfully this function will be triggered
+            console.log("Project Data sent Successfully");
+            //Alert the user that blog is submitted
+            alert("Congratulations!.Your Project is Submitted Successfully.");
+            //Clear the states
+            this.setState({
+                // Here the attributes start for the blog
+                title: "",
+                category: "",
+                disc: "",
+                ImageURLArray: [],
+                architects: "",
+                area: 0,
+                completionDate: new Date(),
+                StructuralEngineers: "",
+                LandscapeArchitects: "",
+                City: "",
+                Country: "",
+                GoogleMapLink: "",
+                key: "",
+                dateTime: "",
+                //New entities
+                projectSector: "",
+                projectService: "",
+                ProjectArchitects: "",
+                interiorArchitects: "",
+                LandscapeArchitects: "",
+                builderArchitects: "",
+                photographyPersons: ""
+            })
+        })
 
         this.setState({
             // Here the important attributes start
