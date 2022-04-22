@@ -521,7 +521,7 @@ class Admin extends React.Component {
                 <br />
 
                 {/* MODAL */}
-                <div className="modal fade" id="exampleModal" tabIndex={-1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal fade" id="exampleModal" tabIndex={1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
                             <div className="modal-header">
@@ -532,11 +532,11 @@ class Admin extends React.Component {
                             </div>
                             <div className="modal-body">
                                 <div className="text-info">
-                                    <h1>Please wait for 5 seconds atleast.We are saving your project to cloud.Thanks!</h1>
+                                    <h1>"Please wait for 5 seconds atleast.We are saving your project to cloud.Thanks!"</h1>
                                 </div>
                             </div>
                             <div className="modal-footer">
-                                <button type="button" className="btn btn-primary">Acknowledged.</button>
+                                <button type="button" className="btn btn-primary" data-dismiss="modal">Acknowledged</button>
                             </div>
                         </div>
                     </div>
@@ -808,7 +808,7 @@ class Admin extends React.Component {
                                                             ) : (
                                                                 <div>
                                                                     <h4 className="mt-2">You are ready to post the Project.</h4>
-                                                                    <button className="btn btn-success btn-block" onClick={this.sendDataProject}>Submit</button>
+                                                                    <button className="btn btn-success btn-block" type="button" data-toggle="modal" data-target="#exampleModal" onClick={this.sendDataProject}>Submit</button>
                                                                 </div>
                                                             )}
                                                             <br />
@@ -817,7 +817,12 @@ class Admin extends React.Component {
                                                                 <button className="btn btn-danger" onClick={this.sign_out}>Sign Out</button>
                                                                 <br />
                                                             </div>
+
                                                             <br />
+
+                                                            {/* <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                                                Launch demo modal
+                                                            </button> */}
 
                                                         </div>
                                                         <br />
