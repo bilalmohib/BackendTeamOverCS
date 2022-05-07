@@ -344,6 +344,7 @@ class Admin extends React.Component {
                 projectClient: "",
                 areaHeight: 0,
                 areaWidth: 0,
+                progress: 0,
                 areaUnit: "",
                 completionDate: new Date(),
                 StructuralEngineers: "",

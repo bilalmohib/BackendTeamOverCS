@@ -11,6 +11,7 @@ const Projects = () => {
     const [status, setStatus] = useState(false);
     const [signedInUserData, setSignedInUserData] = useState(null)
     const [loading, setLoading] = useState(false);
+    const [projectReload, setProjectReload] = useState(false);
     const [firestoreData, setFirestoreData] = useState([]);
 
     useEffect(() => {
@@ -68,9 +69,10 @@ const Projects = () => {
                 ///////////////////////////////Here is the code for sending notifications
                 ///////////////////////////////Here is the code for sending notifications
 
-                if (firestoreData.length !== data.length) {
+                if (firestoreData.length !== data.length || projectReload == true) {
                     setFirestoreData(data);
                     setLoading(true);
+                    setProjectReload(false);
                     console.log("Updated")
                 }
             }).catch(err => {
@@ -92,10 +94,12 @@ const Projects = () => {
                         return (
                             <div key={i}>
                                 <InividualProjectComponent
+                                    number={(i + 1)}
                                     id={element.id}
                                     uid={element.uid}
                                     userEmail={element.userEmail}
                                     Title={element.Title}
+                                    reloadProject={setProjectReload}
                                     Description={element.Description}
                                     ImageURLArray={element.ImageURLArray}
                                     Architects={element.Architects}
