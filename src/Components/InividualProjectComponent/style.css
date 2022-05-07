@@ -1,0 +1,11 @@
+.projectInividualComponent {
+    padding: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.btn-delete, .btn-edit {
+    font-size: 20px !important;
+    border-radius: 10px !important;
+}

@@ -14,9 +14,8 @@ import firebase from "../../firebase/index";
 import 'firebase/firestore';
 import { storage } from '../../firebase/index';
 
-import { MDBProgress } from 'mdbreact';
-
-import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter } from 'mdbreact';
+import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBProgress } from 'mdbreact';
+import Projects from '../Projects/Projects';
 
 const currentDate = new Date();
 
@@ -102,7 +101,6 @@ class Admin extends React.Component {
                 })
             }
         })
-
     }
 
     componentDidUpdate = () => {
@@ -307,7 +305,6 @@ class Admin extends React.Component {
 
         let projectDataObject = {
             Title: this.state.title,
-            Category: this.state.category,
             Description: this.state.disc,
             ImageURLArray: this.state.ImageURLArray,
             Architects: this.state.architects,
@@ -341,7 +338,6 @@ class Admin extends React.Component {
             this.setState({
                 // Here the attributes start for the blog
                 title: "",
-                category: "",
                 disc: "",
                 ImageURLArray: [],
                 architects: "",
@@ -539,7 +535,6 @@ class Admin extends React.Component {
                 {(this.state.status) ? (
                     <div>
                         <div className="container">
-
                             <div>
                                 {/* Tabs navs */}
                                 <ul className="nav nav-tabs nav-fill mb-3 mt-2" style={{ marginLeft: "-0.5%" }} id="ex1" role="tablist">
@@ -803,9 +798,9 @@ class Admin extends React.Component {
 
                                                             <br />
 
-                                                            {/* <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                                                                Launch demo modal
-                                                            </button> */}
+                                                            <hr />
+
+                                                            <Projects />
 
                                                         </div>
                                                         <br />

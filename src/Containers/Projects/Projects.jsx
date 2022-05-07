@@ -1,191 +1,128 @@
-import React, { useState, useEffect } from 'react';
-import Navbar from "../../Components/Navbar";
-import Footer from "../../Components/Footer";
-import ProjectsList from "../../Components/ProjectsList";
+import { useState, useEffect } from "react";
+import firebase from "../../firebase/index";
+import 'firebase/firestore';
+import { storage } from '../../firebase/index';
 
-import { connect } from "react-redux"
-import { get_all_projects_data } from '../../store/action/index';
+//Importing components
+import InividualProjectComponent from "../../Components/InividualProjectComponent";
 
-import '../../css/Projects.css';
+const Projects = () => {
 
-const Projects = (props) => {
+    const [status, setStatus] = useState(false);
+    const [signedInUserData, setSignedInUserData] = useState(null)
+    const [loading, setLoading] = useState(false);
+    const [firestoreData, setFirestoreData] = useState([]);
 
     useEffect(() => {
-        props.get_all_projects_data();
-    }, [])
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                setStatus(true);
+                setSignedInUserData(user);
+                // setStatus(true);
+            }
+            else {
+                setStatus(false);
+                setSignedInUserData(null);
+            }
+        })
+
+        console.log("All the Projects Data in the Projects Component is : ", firestoreData);
+
+        const db = firebase.firestore();
+        db.collection(`Projects`)
+            .get()
+            .then(snapshot => {
+                let data = [];
+                snapshot.forEach(element => {
+                    data.push(Object.assign({
+                        "id": element.id,
+                        "uid": element.uid,
+                        "userEmail": element.userEmail,
+                        "Title": element.Title,
+                        "Description": element.Description,
+                        "ImageURLArray": element.ImageURLArray,
+                        "Architects": element.Architects,
+                        "ProjectClient": element.ProjectClient,
+                        "Area": element.Area,
+                        "CompletionDate": element.CompletionDate,
+                        "StructuralEngineers": element.StructuralEngineers,
+                        "LandscapeArchitects": element.LandscapeArchitects,
+                        "projectSiteLocation": element.projectSiteLocation,
+                        "GoogleMapLink": element.GoogleMapLink,
+                        "Key": element.Key,
+                        "timeSubmitted": element.timeSubmitted,
+                        //New entities
+                        "ProjectSector": element.ProjectSector,
+                        "ProjectService": element.ProjectService,
+                        "ArchitecturalTeam": element.ArchitecturalTeam,
+                        "InteriorPersons": element.InteriorPersons,
+                        "LandscapePersons": element.LandscapePersons,
+                        "BuilderArchitects": element.BuilderArchitects,
+                        "PhotographyPersons": element.PhotographyPersons
+                    }, element.data()))
+                })
+                console.log("data of projects from cloud is equal to ==> ", data)
+                ///////////////////////////////Here is the code for sending notifications
+                ///////////////////////////////Here is the code for sending notifications
+
+                ///////////////////////////////Here is the code for sending notifications
+                ///////////////////////////////Here is the code for sending notifications
+
+                if (firestoreData.length !== data.length) {
+                    setFirestoreData(data);
+                    setLoading(true);
+                    console.log("Updated")
+                }
+            }).catch(err => {
+                console.log(err)
+            })
+    })
 
     return (
-        <div>
-            <div className="container">
-                <div className="fixed-top">
-                    <Navbar transparent={true} />
+        <div className="container">
+            <div className="row">
+                <div className="col-md-12 border">
+                    <h2 className="text-dark text-bold">
+                        <b>
+                            All the projects are listed here.You can <span className="text-danger">Delete</span> them or <span className="text-warning">Edit</span> them.
+                        </b>
+                    </h2>
+                    <br />
+                    {firestoreData.map((element, i) => {
+                        return (
+                            <div key={i}>
+                                <InividualProjectComponent
+                                    id={element.id}
+                                    uid={element.uid}
+                                    userEmail={element.userEmail}
+                                    Title={element.Title}
+                                    Description={element.Description}
+                                    ImageURLArray={element.ImageURLArray}
+                                    Architects={element.Architects}
+                                    ProjectClient={element.ProjectClient}
+                                    Area={element.Area}
+                                    CompletionDate={element.CompletionDate}
+                                    StructuralEngineers={element.StructuralEngineers}
+                                    LandscapeArchitects={element.LandscapeArchitects}
+                                    projectSiteLocation={element.projectSiteLocation}
+                                    GoogleMapLink={element.GoogleMapLink}
+                                    Key={element.Key}
+                                    timeSubmitted={element.timeSubmitted}
+                                    //New entities
+                                    ProjectSector={element.ProjectSector}
+                                    ProjectService={element.ProjectService}
+                                    ArchitecturalTeam={element.ArchitecturalTeam}
+                                    InteriorPersons={element.InteriorPersons}
+                                    LandscapePersons={element.LandscapePersons}
+                                    BuilderArchitects={element.BuilderArchitects}
+                                    PhotographyPersons={element.PhotographyPersons}
+                                />
+                            </div>
+                        )
+                    })}
                 </div>
             </div>
-
-            <div className="bgimg-1">
-                <div className="caption">
-                    <h1 className="TitleCarousal"><b>Projects</b></h1>
-                    <div className="disc_top_width">
-                        <h3 className="DiscCarousal">Home / Projects</h3>
-                    </div>
-                </div>
-            </div>
-            <br />
-          
-            {/* Projects section */}
-            <div className="container paddingMobile">
-                <br />
-                {/* Tabs navs */}
-                <ul className="nav nav-tabs nav-justified mb-3" id="ex1" role="tablist">
-                    <li style={{ marginLeft: "0px" }} className="nav-item tabstitle" role="presentation">
-                        <a className="nav-link active" id="ex3-tab-1" data-mdb-toggle="tab" href="#ex3-tabs-1" role="tab" aria-controls="ex3-tabs-1" aria-selected="true">All</a>
-                    </li>
-                    <li className="nav-item tabstitle" role="presentation">
-                        <a className="nav-link" id="ex3-tab-2" data-mdb-toggle="tab" href="#ex3-tabs-2" role="tab" aria-controls="ex3-tabs-2" aria-selected="false">Commercial Exterior</a>
-                    </li>
-                    <li className="nav-item tabstitle" role="presentation">
-                        <a className="nav-link" id="ex3-tab-3" data-mdb-toggle="tab" href="#ex3-tabs-3" role="tab" aria-controls="ex3-tabs-3" aria-selected="false">Commercial Interior</a>
-                    </li>
-                    <li className="nav-item tabstitle" role="presentation">
-                        <a className="nav-link" id="ex3-tab-4" data-mdb-toggle="tab" href="#ex3-tabs-4" role="tab" aria-controls="ex3-tabs-4" aria-selected="false">Residential Exterior</a>
-                    </li>
-                    <li className="nav-item tabstitle" role="presentation">
-                        <a className="nav-link" id="ex3-tab-5" data-mdb-toggle="tab" href="#ex3-tabs-5" role="tab" aria-controls="ex3-tabs-5" aria-selected="false">Residential Interior</a>
-                    </li>
-                </ul>
-                {/* Tabs navs */}
-                {/* Tabs content */}
-                <div className="tab-content" id="ex2-content">
-                    <div className="tab-pane fade show active" id="ex3-tabs-1" role="tabpanel" aria-labelledby="ex3-tab-1">
-
-                        <div>
-                            <ul className="portfolio">
-                                {props.projects_data.map((v, i) => {
-                                    return <li key={i}>
-                                        <ProjectsList
-                                            index={i}
-                                            ImageURL={v.ImageURLArray[0]}
-                                            title={v.Title}
-                                            category={v.Category}
-                                        />
-                                    </li>
-                                })}
-                            </ul>
-                        </div>
-                        {/* Ye */}
-                    </div>
-                    <div className="tab-pane fade" id="ex3-tabs-2" role="tabpanel" aria-labelledby="ex3-tab-2">
-                        <div>
-                            <ul className="portfolio">
-                                {props.projects_data.map((v, i) => {
-                                    return <li key={i}>
-                                        <figure>
-                                            {(v.Category == "Commercial Exterior") ? (
-                                                <ProjectsList
-                                                    index={i}
-                                                    ImageURL={v.ImageURLArray[0]}
-                                                    title={v.Title}
-                                                    category={v.Category}
-                                                />
-                                            ) : (
-                                                <div>
-                                                    <span></span>
-                                                </div>
-                                            )}
-                                        </figure>
-                                    </li>
-                                })}
-                            </ul>
-                        </div>
-                    </div>
-                    <div className="tab-pane fade" id="ex3-tabs-3" role="tabpanel" aria-labelledby="ex3-tab-3">
-                        <div>
-                            <ul className="portfolio">
-                                {props.projects_data.map((v, i) => {
-                                    return <li key={i}>
-                                        <figure>
-                                            {(v.Category == "Commercial Interior") ? (
-                                               <ProjectsList
-                                               index={i}
-                                               ImageURL={v.ImageURLArray[0]}
-                                               title={v.Title}
-                                               category={v.Category}
-                                           />
-                                            ) : (
-                                                <div>
-                                                    <span></span>
-                                                </div>
-                                            )}
-                                        </figure>
-                                    </li>
-                                })}
-                            </ul>
-                        </div>
-                    </div>
-                    <div className="tab-pane fade" id="ex3-tabs-4" role="tabpanel" aria-labelledby="ex3-tab-4">
-                        <div>
-                            <ul className="portfolio">
-                                {props.projects_data.map((v, i) => {
-                                    return <li key={i}>
-                                        <figure>
-                                            {(v.Category == "Residential Exterior") ? (
-                                               <ProjectsList
-                                               index={i}
-                                               ImageURL={v.ImageURLArray[0]}
-                                               title={v.Title}
-                                               category={v.Category}
-                                           />
-                                            ) : (
-                                                <div>
-                                                    <span></span>
-                                                </div>
-                                            )}
-                                        </figure>
-                                    </li>
-                                })}
-                            </ul>
-                        </div>
-                    </div>
-                    <div className="tab-pane fade" id="ex3-tabs-5" role="tabpanel" aria-labelledby="ex3-tab-5">
-                        <div>
-                            <ul className="portfolio">
-                                {props.projects_data.map((v, i) => {
-                                    return <li key={i}>
-                                        <figure>
-                                            {(v.Category == "Residential Interior") ? (
-                                                <ProjectsList
-                                                index={i}
-                                                ImageURL={v.ImageURLArray[0]}
-                                                title={v.Title}
-                                                category={v.Category}
-                                            />
-                                            ) : (
-                                                <div>
-                                                    <span></span>
-                                                </div>
-                                            )}
-                                        </figure>
-                                    </li>
-                                })}
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                {/* Tabs content */}
-            </div>
-
-            <br />
-            <br />
-            <Footer />
-            {/* Projects section */}
-        </div >
+        </div>
     )
 }
-const mapStateToProps = (state) => ({
-    SET_KEY: state.app.SET_KEY,
-    projects_data: state.app.GET_PROJECTS_DATA
-})
-const mapDispatchToProp = (dispatch) => ({
-    get_all_projects_data: () => dispatch(get_all_projects_data()),
-})
-export default connect(mapStateToProps, mapDispatchToProp)(Projects);
+export default Projects;
