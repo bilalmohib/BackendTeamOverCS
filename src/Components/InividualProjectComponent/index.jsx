@@ -9,34 +9,33 @@ const InividualProjectComponent = (props) => {
     const [status, setStatus] = useState(false);
     const [signedInUserData, setSignedInUserData] = useState(null)
 
-    const [projectsEditData, setProjectsEditData] = useState({
-        number: props.number,
-        id: props.id,
-        uid: props.uid,
-        userEmail: props.userEmail,
-        Title: props.Title,
-        reloadProject: props.reloadProject,
-        Description: props.Description,
-        ImageURLArray: props.ImageURLArray,
-        Architects: props.Architects,
-        ProjectClient: props.ProjectClient,
-        Area: props.Area,
-        CompletionDate: props.CompletionDate,
-        StructuralEngineers: props.StructuralEngineers,
-        LandscapeArchitects: props.LandscapeArchitects,
-        projectSiteLocation: props.projectSiteLocation,
-        GoogleMapLink: props.GoogleMapLink,
-        Key: props.Key,
-        timeSubmitted: props.timeSubmitted,
-        //New entities
-        ProjectSector: props.ProjectSector,
-        ProjectService: props.ProjectService,
-        ArchitecturalTeam: props.ArchitecturalTeam,
-        InteriorPersons: props.InteriorPersons,
-        LandscapePersons: props.LandscapePersons,
-        BuilderArchitects: props.BuilderArchitects,
-        PhotographyPersons: props.PhotographyPersons
-    })
+    const [check, setCheck] = useState("");
+
+    //New entities
+    const [number, setNumber] = useState("");
+    const [id, setId] = useState("");
+    const [uid, setUid] = useState("");
+    const [userEmail, setUserEmail] = useState("");
+    const [Title, setTitle] = useState("");
+    const [Description, setDescription] = useState("");
+    const [ImageURLArray, setImageURLArray] = useState("");
+    const [Architects, setArchitects] = useState("");
+    const [ProjectClient, setProjectClient] = useState("");
+    const [Area, setArea] = useState("");
+    const [CompletionDate, setCompletionDate] = useState("");
+    const [StructuralEngineers, setStructuralEngineers] = useState("");
+    const [LandscapeArchitects, setLandscapeArchitects] = useState("");
+    const [projectSiteLocation, setProjectSiteLocation] = useState("");
+    const [GoogleMapLink, setGoogleMapLink] = useState("");
+    const [Key, setKey] = useState("");
+    const [timeSubmitted, setTimeSubmitted] = useState("");
+    const [ProjectSector, setProjectSector] = useState("");
+    const [ProjectService, setProjectService] = useState("");
+    const [ArchitecturalTeam, setArchitecturalTeam] = useState("");
+    const [InteriorPersons, setInteriorPersons] = useState("");
+    const [LandscapePersons, setLandscapePersons] = useState("");
+    const [BuilderArchitects, setBuilderArchitects] = useState("");
+    const [PhotographyPersons, setPhotographyPersons] = useState("");
 
     useEffect(() => {
         firebase.auth().onAuthStateChanged(user => {
@@ -50,6 +49,8 @@ const InividualProjectComponent = (props) => {
                 setSignedInUserData(null);
             }
         })
+
+        console.log("Title is equal to : " + projectsEditData.Title)
     })
 
     const deleteProject = (projectId) => {
@@ -66,13 +67,11 @@ const InividualProjectComponent = (props) => {
     }
 
     const editProject = (
-        projectId,
         number,
         id,
         uid,
         userEmail,
         Title,
-        reloadProject,
         Description,
         ImageURLArray,
         Architects,
@@ -94,8 +93,9 @@ const InividualProjectComponent = (props) => {
         BuilderArchitects,
         PhotographyPersons
     ) => {
-        alert(`Will implement Soon ${projectId}`)
-        console.log(`Project ID : ${projectId}`)
+        setCheck(number)
+        document.getElementById("check").innerHTML = number
+        alert(`Will implement Soon ${check}`)
     }
 
     return (
@@ -128,7 +128,44 @@ const InividualProjectComponent = (props) => {
 
             <div className="d-flex justify-content-evenly">
                 <button className="btn btn-delete btn-danger btn-lg" onClick={() => deleteProject(props.id)}>DELETE</button>
-                <button type="button" className="btn btn-edit btn-warning btn-lg" data-mdb-toggle="modal" data-mdb-target="#staticBackdrop" onClick={() => editProject(props.number)}>EDIT</button>
+                <button
+                    type="button"
+                    className="btn btn-edit btn-warning btn-lg"
+                    // data-mdb-toggle="modal"
+                    // data-mdb-target="#staticBackdrop"
+                    onClick={
+                        () => editProject(
+                            props.number,
+                            props.id,
+                            props.uid,
+                            props.userEmail,
+                            props.Title,
+                            props.Description,
+                            props.ImageURLArray,
+                            props.Architects,
+                            props.ProjectClient,
+                            props.Area,
+                            props.CompletionDate,
+                            props.StructuralEngineers,
+                            props.LandscapeArchitects,
+                            props.projectSiteLocation,
+                            props.GoogleMapLink,
+                            props.Key,
+                            props.timeSubmitted,
+                            //New entities
+                            props.ProjectSector,
+                            props.ProjectService,
+                            props.ArchitecturalTeam,
+                            props.InteriorPersons,
+                            props.LandscapePersons,
+                            props.BuilderArchitects,
+                            props.PhotographyPersons
+                        )}
+                >
+                    EDIT
+                </button>
+                <button type="button" data-mdb-toggle="modal"
+                    data-mdb-target="#staticBackdrop">Launch</button>
             </div>
 
             {/* Modal to Edit Projects */}
@@ -141,15 +178,21 @@ const InividualProjectComponent = (props) => {
                         </div>
                         <div className="modal-body">
                             <form>
-                                <h4><b>Project No. :</b> {props.number}</h4>
-                                <h4><b>Project ID :</b> {props.id}</h4>
+                                <h4><b>Project No. :</b> <span id="check"></span></h4>
+                                <h4><b>Project ID :</b> {projectsEditData.id}</h4>
                                 <div className="mb-3">
                                     <label htmlFor="recipient-name" className="col-form-label">Recipient:</label>
-                                    <input type="text" className="form-control" id="recipient-name" />
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        value={projectsEditData.Title}
+                                        onChange={(e) => handleChange("Title", e)}
+                                        id="recipient-name"
+                                    />
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="message-text" className="col-form-label">Message:</label>
-                                    <textarea className="form-control" id="message-text" defaultValue={""} />
+                                    <textarea className="form-control" id="message-text" value={projectsEditData.Description} onChange={(e) => setProjectsEditData({ Description: e.target.value })} />
                                 </div>
                             </form>
                         </div>
