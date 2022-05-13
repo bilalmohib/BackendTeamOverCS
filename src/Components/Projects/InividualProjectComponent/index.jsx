@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import firebase from "../../firebase/index";
+import firebase from "../../../firebase/index";
 import 'firebase/firestore';
-import { storage } from '../../firebase/index';
+import { storage } from '../../../firebase/index';
 
 import "./style.css";
 

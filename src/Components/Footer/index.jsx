@@ -1,8 +1,8 @@
 import React from "react";
-import logo from "../assets/logo1.png";
-import "../Styling/Footer.css";
+import logo from "../../assets/logo1.png";
+import "./style.css";
 
-export default class Testimonials extends React.PureComponent {
+export default class Footer extends React.PureComponent {
     render() {
         return (
             <footer className="footer">
@@ -13,7 +13,7 @@ export default class Testimonials extends React.PureComponent {
                         <div className="col-xs-4 col-lg-4 col-md-4 col-sm-4">
                             <img className="footer-logo" src={logo} width="280" alt="logo" />
                             <p className="text-white">Team Overc’s is a trusted name in the house construction and consultancy industry. With the extensive experience in the field since 2011, Team Overc’s has made a name for itself providing high quality Construction and Building services to its clientele.</p>
-                            <br/>
+                            <br />
                         </div>
                         <div className="col-xs-4 col-lg-4 col-md-4 col-sm-4">
                             <h3 className="text-white">ADDRESS</h3>
@@ -23,7 +23,7 @@ export default class Testimonials extends React.PureComponent {
                             <br />
                             <p className="text-primary">Talk to Us</p>
                             <p className="text-white">+92-42-35774353<br />+92-302-4666366</p>
-                            <br/>
+                            <br />
                         </div>
                         <div className="col-xs-4 col-lg-4 col-md-4 col-sm-4">
                             <form action="">
@@ -42,7 +42,7 @@ export default class Testimonials extends React.PureComponent {
                         </div>
                     </div>
                     <br />
-                    <br/> 
+                    <br />
                     <div className="row">
                         <div className="col-xs-4 col-lg-4 col-md-4 col-sm-4">
                             <p className="text-center"><a className="text-grey" href="#!">Sitemap</a></p>

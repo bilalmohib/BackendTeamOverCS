@@ -5,7 +5,7 @@ import { Link, useHistory } from "react-router-dom";
 import { connect } from "react-redux"
 import { setCurrentKey } from '../store/action/index';
 
-import '../css/Projects.css';
+import './style.css';
 
 function ProjectsList(props) {
 

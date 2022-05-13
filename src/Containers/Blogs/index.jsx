@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Navbar from "../../Components/Navbar";
-import Footer from "../../Components/Footer";
+import Header from '../../Components/Header';
+import Footer from '../../Components/Footer';
 import Loader from "../../Components/Loader";
 
 import DatePicker from 'react-date-picker';
@@ -14,8 +14,10 @@ import firebase from "../../firebase/index";
 import 'firebase/firestore';
 import { storage } from '../../firebase/index';
 
+import "./style.css";
+
 import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBProgress } from 'mdbreact';
-import Projects from '../Projects/Projects';
+import AllProjects from '../../Components/Projects/AllProjects';
 
 const currentDate = new Date();
 
@@ -466,7 +468,7 @@ class Blogs extends React.Component {
             <div>
                 <div className="container">
                     <div className="fixed-top">
-                        <Navbar />
+                        <Header />
                     </div>
                 </div>
 
@@ -478,7 +480,7 @@ class Blogs extends React.Component {
                 <br />
 
                 {/* MODAL */}
-                <div className="modal fade" id="exampleModal" tabIndex={1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                {/* <div className="modal fade" id="exampleModal" tabIndex={1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
                             <div className="modal-header">
@@ -497,7 +499,7 @@ class Blogs extends React.Component {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
                 {/* MODAL */}
 
                 {(firebase.auth().currentUser == null) ? (
@@ -518,268 +520,24 @@ class Blogs extends React.Component {
                                 {/* Tabs navs */}
                                 <ul className="nav nav-tabs nav-fill mb-3 mt-2" style={{ marginLeft: "-0.5%" }} id="ex1" role="tablist">
                                     <li className="nav-item tabad" role="presentation">
-                                        <a className="nav-link active tabadminLink" data-mdb-toggle="tab" href="#ex2-tabs-1" role="tab" aria-controls="ex2-tabs-1" aria-selected="true">ALL PROJECTS</a>
+                                        <a className="nav-link active tabadminLink" data-mdb-toggle="tab" href="#ex2-tabs-1" role="tab" aria-controls="ex2-tabs-1" aria-selected="true">ALL Blogs</a>
                                     </li>
                                     <li className="nav-item tabad" role="presentation">
-                                        <a className="nav-link tabadminLink" id="ex2-tabadmin-2" data-mdb-toggle="tab" href="#ex2-tabs-2" role="tab" aria-controls="ex2-tabs-2" aria-selected="false">ALL BLOGS</a>
+                                        <a className="nav-link tabadminLink" id="ex2-tabadmin-2" data-mdb-toggle="tab" href="#ex2-tabs-2" role="tab" aria-controls="ex2-tabs-2" aria-selected="false">Add New Blog</a>
                                     </li>
-                                    {/* <li className="nav-item tabad" role="presentation">
-                                        <a className="nav-link tabadminLink" data-mdb-toggle="tab" href="#ex2-tabs-3" role="tab" aria-controls="ex2-tabs-3" aria-selected="false">Another link</a>
-                                    </li> */}
                                 </ul>
                                 {/* Tabs navs */}
                                 {/* Tabs content */}
                                 <div className="tab-content" id="ex2-content">
                                     <div className="tab-pane fade show active" id="ex2-tabs-1" role="tabpanel" aria-labelledby="ex2-tab-1">
                                         <div className="container border">
-                                            <button type="button" className="btn btn-primary btn-rounded btnAddNewProject mt-3">Add New Project</button>
-                                            <br /><br />
                                             {(this.state.projectloader == false) ? (
                                                 <div>
                                                     <div className="container admin-container">
                                                         {/* Here the game starts */}
                                                         <div>
-                                                            <h1 className="text-inverse mt-3">Upload a Project : -</h1>
-                                                            <br />
-
-                                                            <div>
-                                                                <h3>Enter the Title of the project : <span className="text-red">*</span></h3>
-                                                                <input type="text" placeholder="Enter the title for the blog" value={this.state.title} onChange={(e) => this.setState({ title: e.target.value })} className="form-control title" aria-label="..." />
-                                                            </div>
-
-                                                            <br />
-
-                                                            <div>
-                                                                <h3>Enter the Client name  : <span className="text-red">*</span></h3>
-                                                                <input type="text" placeholder="Enter the Project's Client name" value={this.state.projectClient} onChange={(e) => this.setState({ projectClient: e.target.value })} className="form-control title" aria-label="..." />
-                                                            </div>
-
-                                                            <br />
-
-                                                            <h3>Select A Sector for the Project</h3>
-
-                                                            <div className="input-group input-group-md category_select">
-
-                                                                <span className="input-group-addon glyphicon glyphicon-search" id="sizing-addon2"></span>
-
-                                                                <select style={{ fontSize: "15px", width: "200px" }} value={this.state.projectSector}
-                                                                    onChange={(e) => this.setProjectSectorFunction(e)} className="form-control">
-                                                                    <option value="Residential">Residential</option>
-                                                                    <option value="Commercial">Commercial</option>
-                                                                    <option value="Public Building">Public Building</option>
-                                                                    <option value="Farm House">Farm House</option>
-                                                                </select>
-                                                            </div>
-
-                                                            <br />
-
-                                                            <h3>Select A Service for the Project <span className="text-red">*</span></h3>
-
-                                                            <div className="input-group input-group-md category_select">
-
-                                                                <span className="input-group-addon glyphicon glyphicon-search" id="sizing-addon2"></span>
-
-                                                                <select style={{ fontSize: "15px", width: "200px" }} value={this.state.projectService}
-                                                                    onChange={(e) => this.setProjectServiceFunction(e)} className="form-control">
-                                                                    <option value="Architectural">Architectural</option>
-                                                                    <option value="Interior">Interior</option>
-                                                                    <option value="Furniture">Landscaping</option>
-                                                                    <option value="Construction">Construction</option>
-                                                                </select>
-                                                            </div>
-
-                                                            <br />
-
-                                                            <h3>Enter the description of the project. <span className="text-red">*</span></h3>
-
-                                                            <textarea name="" cols="70" rows="10" className="form-control paraAdmin" placeholder="For Example, A 5 marla hourse created by architects of Team over cs Pakistan." value={this.state.disc} onChange={(e) => this.setState({ disc: e.target.value })}></textarea>
-
-
-
-                                                            {/* Here the uploaded image will be here */}
-                                                            <div>
-                                                                <br />
-                                                                <h3>Upload Images for the project : <span className="text-red">*</span></h3>
-                                                                <MDBProgress value={this.state.progress} className="my-2" height="20px" />
-                                                                <label htmlFor="">Upload As many images as you want for project</label>
-                                                                <input type="file" className="form-control" multiple onChange={(e) => this.handleUpload(e)} />
-                                                                {/* <button className="btn btn-primary uploadBtn mt-3" onClick={(e) => this.testUpload(e)}>Upload</button> */}
-                                                                <br />
-                                                                <br />
-                                                                <h4 className="ColorBloGText border">{this.state.disc}</h4>
-                                                                <div className="border">
-                                                                    {(false) ? (
-                                                                        <div className="text-center">
-                                                                            <div className="loader"></div>
-                                                                        </div>
-                                                                    ) : (
-                                                                        <div>
-
-                                                                            {this.state.ImageURLArray.map((v, i) => {
-                                                                                return <li key={i} style={{ display: "inline-block", listStyle: "none" }}>
-                                                                                    <div>
-                                                                                        {/* Here the loop div is here */}
-                                                                                        <img width={250} height={250} className="border ml-2 mt-2" src={v} alt={i} />
-                                                                                        {/* Here the loop div is here */}
-                                                                                    </div>
-                                                                                </li>
-                                                                            })}
-                                                                        </div>
-                                                                    )}
-                                                                </div>
-                                                            </div>
-                                                            {/* Here the uploaded image will be here */}
-
-                                                            <br />
-
-                                                            <div>
-                                                                <h3>Enter the Architectural team for the project :</h3>
-                                                                <input type="text" placeholder="Eg: Philip Stejskal Architecture,Ali Imran etc" value={this.state.architects} onChange={(e) => this.setState({ architects: e.target.value })} className="form-control title" aria-label="..." />
-                                                            </div>
-
-                                                            <br />
-
-                                                            <div>
-                                                                <h3>Enter the Interiors team for the project :</h3>
-                                                                <input type="text" placeholder="Eg: Brian Brady etc" value={this.state.interiorArchitects} onChange={(e) => this.setState({ interiorArchitects: e.target.value })} className="form-control title" aria-label="..." />
-                                                            </div>
-
-                                                            <br />
-
-                                                            <div>
-                                                                <h3>Enter the Landscape Architects of the project : </h3>
-                                                                <input type="text" placeholder="Eg: Annghi Tran Landscape Architecture Studio etc" value={this.state.LandscapeArchitects} onChange={(e) => this.setState({ LandscapeArchitects: e.target.value })} className="form-control title" aria-label="..." />
-                                                            </div>
-
-                                                            <br />
-
-                                                            <div>
-                                                                <h3>Enter the Builders of the project :</h3>
-                                                                <input type="text" placeholder="Eg: Annghi Tran Landscape Architecture Studio etc" value={this.state.builderArchitects} onChange={(e) => this.setState({ builderArchitects: e.target.value })} className="form-control title" aria-label="..." />
-                                                            </div>
-
-                                                            <br />
-
-                                                            <div>
-                                                                <h3>Photography by :</h3>
-                                                                <input type="text" placeholder="Eg: Joshua McHugh etc" value={this.state.photographyPersons} onChange={(e) => this.setState({ photographyPersons: e.target.value })} className="form-control title" aria-label="..." />
-                                                            </div>
-
-                                                            <br />
-
-                                                            <div>
-                                                                <h3>Enter the Area of the project(m<sup>2</sup>) : <span className="text-red">*</span></h3>
-                                                                <div className="d-flex justify-content-evenly">
-                                                                    <div className="d-flex justify-content-evenly">
-                                                                        <div>
-                                                                            <span>Height:</span> <input type="number" placeholder="Eg:  2000m" value={this.state.areaHeight} onChange={(e) => this.setState({ areaHeight: e.target.value })} className="form-control title" aria-label="..." />
-                                                                        </div>
-                                                                        <div className='ml-3'>
-                                                                            <span>Width:</span> <input type="number" placeholder="Eg:  5000m" value={this.state.areaWidth} onChange={(e) => this.setState({ areaWidth: e.target.value })} className="form-control title" aria-label="..." />
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className='w-50'>
-                                                                        <span>Area Unit:</span> <input type="text" placeholder="Eg:  Marla,Kanals,Square Feet" value={this.state.areaUnit} onChange={(e) => this.setState({ areaUnit: e.target.value })} className="form-control title" aria-label="..." />
-                                                                    </div>
-                                                                </div>
-
-                                                                <br />
-
-                                                                <h5 className='text-warning'>Entered Area is : {this.state.areaHeight} * {this.state.areaWidth} {this.state.areaUnit}</h5>
-
-                                                            </div>
-
-                                                            <br />
-
-                                                            <div>
-                                                                <h3>Select the date of completion of Project :</h3>
-                                                                <DatePicker
-                                                                    onChange={(val) => this.setState({
-                                                                        completionDate: val
-                                                                    })}
-                                                                    value={this.state.completionDate}
-                                                                />
-                                                            </div>
-
-                                                            <br />
-
-                                                            <div>
-                                                                <h3>Enter the Structural Engineers of the project :</h3>
-                                                                <input type="text" placeholder="Eg: Andreotta Cardenosa Consulting Engineers etc" value={this.state.StructuralEngineers} onChange={(e) => this.setState({ StructuralEngineers: e.target.value })} className="form-control title" aria-label="..." />
-                                                            </div>
-
-                                                            <br />
-
-                                                            <div>
-                                                                <h3>Enter the Project Architects of the project :</h3>
-                                                                <input type="text" placeholder="Eg: Louise Allen, Julia Kiefer, Jaime Mayger, Philip Stejskal etc" value={this.state.ProjectArchitects} onChange={(e) => this.setState({ ProjectArchitects: e.target.value })} className="form-control title" aria-label="..." />
-                                                            </div>
-
-                                                            <br />
-
-                                                            <div>
-                                                                <h3>Enter the Project Site : <span className="text-red">*</span></h3>
-                                                                <input type="text" placeholder="Eg: Louise Allen, Julia Kiefer, Jaime Mayger, Philip Stejskal etc" value={this.state.projectSiteLocation} onChange={(e) => this.setState({ projectSiteLocation: e.target.value })} className="form-control title" aria-label="..." />
-                                                            </div>
-
-                                                            <br />
-
-                                                            <div>
-                                                                <h3>Enter the Google Map Link where the project is located :</h3>
-                                                                <input type="text" placeholder="Eg: https://www.google.com/maps?ll=31.476852,74.449119&z=16&t=m&hl=en&gl=US&mapclient=embed&cid=17223166234116770493 etc" value={this.state.GoogleMapLink} onChange={(e) => this.setState({ GoogleMapLink: e.target.value })} className="form-control title" aria-label="..." />
-                                                                <br />
-                                                                <iframe title='Map' id="mapAdmin" src={this.state.GoogleMapLink} allowFullScreen loading="lazy" />
-                                                            </div>
-
-                                                            {/* ProjectSector: this.state.projectSector, */}
-                                                            {/* ProjectService: this.state.projectService,
-                                                                ArchitecturalTeam: this.state.ProjectArchitects,
-                                                                InteriorPersons: this.state.interiorArchitects,
-                                                                LandscapePersons: this.state.LandscapeArchitects,
-                                                                BuilderArchitects: this.state.builderArchitects,
-                                                                PhotographyPersons: this.state.photographyPersons */}
-
-                                                            {(
-                                                                this.state.title === ""
-                                                                ||
-                                                                this.state.projectService === ""
-                                                                ||
-                                                                this.state.projectClient === ""
-                                                                ||
-                                                                this.state.areaHeight === 0
-                                                                ||
-                                                                this.state.areaWidth === 0
-                                                                ||
-                                                                this.state.areaUnit === ""
-                                                                ||
-                                                                this.state.disc === ""
-                                                                ||
-                                                                this.state.projectSiteLocation == ""
-                                                                ||
-                                                                this.state.ImageURLArray.length == 0
-                                                            ) ? (
-                                                                <div>
-                                                                    <h4 className="text-red">Please fill all the fields indicated as necessary with * sign to submit</h4>
-                                                                    <button disabled={true} className="btn btn-success btn-block">Submit</button>
-                                                                </div>
-                                                            ) : (
-                                                                <div>
-                                                                    <h4 className="mt-2">You are ready to post the Project.</h4>
-                                                                    <button className="btn btn-success btn-block" type="button" data-toggle="modal" data-target="#exampleModal" onClick={this.sendDataProject}>Submit</button>
-                                                                </div>
-                                                            )}
-                                                            <br />
-                                                            <div className="text-center">
-                                                                <h3 style={{ fontWeight: "lighter" }}>You are successfully logged in</h3>
-                                                                <button className="btn btn-danger" onClick={this.sign_out}>Sign Out</button>
-                                                                <br />
-                                                            </div>
-
-                                                            <br />
-
+                                                            <h1 className="text-inverse mt-3">All Blogs Are Listed Here You can <span className='text-warning'>Edit</span> them or <span className='text-danger'>delete</span> them </h1>
                                                             <hr />
-
-                                                            <Projects />
 
                                                         </div>
                                                         <br />

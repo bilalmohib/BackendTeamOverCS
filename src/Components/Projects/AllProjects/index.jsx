@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import firebase from "../../firebase/index";
+import firebase from "../../../firebase/index";
 import 'firebase/firestore';
-import { storage } from '../../firebase/index';
+import { storage } from '../../../firebase/index';
 
 //Importing components
-import InividualProjectComponent from "../../Components/InividualProjectComponent";
+import InividualProjectComponent from "../InividualProjectComponent";
 
-const Projects = () => {
+const AllProjects = () => {
 
     const [status, setStatus] = useState(false);
     const [signedInUserData, setSignedInUserData] = useState(null)
@@ -129,4 +129,4 @@ const Projects = () => {
         </div>
     )
 }
-export default Projects;
+export default AllProjects;

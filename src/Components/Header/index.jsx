@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-import logo from "../assets/logo1.png";
+import logo from "../../assets/logo1.png";
 
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
-import '../Styling/Navbar.css';
+import './style.css';
 
-const Navbar = (props) => {
+const Header = (props) => {
 
     useEffect(() => {
         // The debounce function receives our function as a parameter
@@ -96,7 +96,7 @@ const Navbar = (props) => {
                     {/* Container wrapper */}
                 </nav>
             ) : (
-                <nav className="navbar navbar-expand-lg bg-dark navbar-light">
+                <nav className="navbar navbar-expand-lg navbar-light">
                     {/* Container wrapper */}
                     <div className="container-fluid">
                         {/* Navbar brand */}
@@ -115,26 +115,29 @@ const Navbar = (props) => {
                             {/* Left links */}
                             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li className="nav-item">
-                                    <Link to="/admin" style={{fontSize:"20px"}} className="nav-link active t-none">ADMIN PANEL</Link>
-                                </li>
-                                {/* <li className="nav-item">
-                                    <Link to="/about" className="nav-link t-none">ABOUT</Link>
+                                    <Link to="/admin" className="nav-link active t-none">PROJECTS</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link to="/services" className="nav-link t-none">SERVICES</Link>
+                                    <Link to="/admin/blogs" className="nav-link t-none">BLOGS</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link to="/projects" className="nav-link t-none">OUR PROJECTS</Link>
+                                    <Link to="/services" className="nav-link t-none">CAROUSAL</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link to="/certification" className="nav-link t-none">OUR CERTIFICATION</Link>
+                                    <Link to="/services" className="nav-link t-none">VIDEOS</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link to="/contact" className="nav-link t-none">CONTACT US</Link>
+                                    <Link to="/projects" className="nav-link t-none">NEWS</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link to="/blog" className="nav-link t-none">BLOG</Link>
-                                </li> */}
+                                    <Link to="/certification" className="nav-link t-none">SERVICES</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link to="/contact" className="nav-link t-none">QUERIES</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link to="/contact" className="nav-link t-none">USERS</Link>
+                                </li>
                             </ul>
                             {/* Left links */}
                         </div>
@@ -148,4 +151,4 @@ const Navbar = (props) => {
     )
 }
 
-export default Navbar;
+export default Header;

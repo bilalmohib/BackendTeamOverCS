@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Navbar from "../../Components/Navbar";
+import Header from '../../Components/Header';
 import Footer from "../../Components/Footer";
 import Loader from "../../Components/Loader";
 
@@ -7,19 +7,18 @@ import DatePicker from 'react-date-picker';
 
 import logo from "../../assets/logo copy.png"
 
-import { Link, useHistory } from "react-router-dom"
-import '../../css/Admin.css';
+import "./style.css";
 
 import firebase from "../../firebase/index";
 import 'firebase/firestore';
 import { storage } from '../../firebase/index';
 
 import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBProgress } from 'mdbreact';
-import Projects from '../Projects/Projects';
+import AllProjects from '../../Components/Projects/AllProjects';
 
 const currentDate = new Date();
 
-class Admin extends React.Component {
+class Projects extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -488,7 +487,7 @@ class Admin extends React.Component {
             <div>
                 <div className="container">
                     <div className="fixed-top">
-                        <Navbar />
+                        <Header />
                     </div>
                 </div>
 
@@ -540,25 +539,42 @@ class Admin extends React.Component {
                                 {/* Tabs navs */}
                                 <ul className="nav nav-tabs nav-fill mb-3 mt-2" style={{ marginLeft: "-0.5%" }} id="ex1" role="tablist">
                                     <li className="nav-item tabad" role="presentation">
-                                        <a className="nav-link active tabadminLink" data-mdb-toggle="tab" href="#ex2-tabs-1" role="tab" aria-controls="ex2-tabs-1" aria-selected="true">ALL PROJECTS</a>
+                                        <a className="nav-link active tabadminLink" data-mdb-toggle="tab" href="#ex2-tabs-1" role="tab" aria-controls="ex2-tabs-1" aria-selected="true">All Projects</a>
                                     </li>
                                     <li className="nav-item tabad" role="presentation">
-                                        <a className="nav-link tabadminLink" id="ex2-tabadmin-2" data-mdb-toggle="tab" href="#ex2-tabs-2" role="tab" aria-controls="ex2-tabs-2" aria-selected="false">ALL BLOGS</a>
+                                        <a className="nav-link tabadminLink" id="ex2-tabadmin-2" data-mdb-toggle="tab" href="#ex2-tabs-2" role="tab" aria-controls="ex2-tabs-2" aria-selected="false">Add New Projects</a>
                                     </li>
-                                    {/* <li className="nav-item tabad" role="presentation">
-                                        <a className="nav-link tabadminLink" data-mdb-toggle="tab" href="#ex2-tabs-3" role="tab" aria-controls="ex2-tabs-3" aria-selected="false">Another link</a>
-                                    </li> */}
                                 </ul>
                                 {/* Tabs navs */}
                                 {/* Tabs content */}
                                 <div className="tab-content" id="ex2-content">
                                     <div className="tab-pane fade show active" id="ex2-tabs-1" role="tabpanel" aria-labelledby="ex2-tab-1">
                                         <div className="container border">
-                                            <button type="button" className="btn btn-primary btn-rounded btnAddNewProject mt-3">Add New Project</button>
-                                            <br /><br />
                                             {(this.state.projectloader == false) ? (
                                                 <div>
                                                     <div className="container admin-container">
+                                                        {/* Here the game starts */}
+                                                        <div>
+                                                            <br />
+                                                            <AllProjects />
+                                                            <br />
+                                                        </div>
+                                                    </div>
+                                                    {/* Here the game starts */}
+                                                </div>
+                                            ) : (
+                                                <div>
+                                                    <Loader text={"Please wait sending the data to the database......"} />
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+                                    <div className="tab-pane fade" id="ex2-tabs-2" role="tabpanel" aria-labelledby="ex2-tab-2">
+                                        <div className="container border">
+                                            {(this.state.blogloader === false) ? (
+                                                <div>
+                                                    <div className="container admin-container">
+                                                        {/* Here the game starts */}
                                                         {/* Here the game starts */}
                                                         <div>
                                                             <h1 className="text-inverse mt-3">Upload a Project : -</h1>
@@ -799,357 +815,7 @@ class Admin extends React.Component {
 
                                                             <br />
 
-                                                            <hr />
-
-                                                            <Projects />
-
                                                         </div>
-                                                        <br />
-                                                    </div>
-                                                    {/* Here the game starts */}
-                                                </div>
-                                            ) : (
-                                                <div>
-                                                    <Loader text={"Please wait sending the data to the database......"} />
-                                                </div>
-                                            )}
-                                        </div>
-                                    </div>
-                                    <div className="tab-pane fade" id="ex2-tabs-2" role="tabpanel" aria-labelledby="ex2-tab-2">
-                                        <div className="container border">
-                                            <button type="button" className="btn btn-warning btn-rounded btnAddNewProject mt-3">Add New Blog</button>
-                                            <br /><br />
-                                            {(this.state.blogloader === false) ? (
-                                                <div>
-                                                    <div className="container admin-container">
-                                                        {/* Here the game starts */}
-                                                        <div>
-                                                            <h1 className="text-inverse mt-3">Upload a Blog : -</h1>
-                                                            <br />
-
-                                                            <div>
-                                                                <h3>Enter the Title of the Blog : <span className="text-red">*</span></h3>
-                                                                <input type="text" placeholder="Enter the title for the blog" value={this.state.BlogTitle} onChange={(e) => this.setState({ BlogTitle: e.target.value })} className="form-control title" aria-label="..." />
-                                                            </div>
-
-                                                            <br />
-
-                                                            <h3>Select A Category <span className="text-red">*</span></h3>
-
-                                                            <div className="input-group input-group-md category_select">
-
-                                                                <span className="input-group-addon glyphicon glyphicon-search" id="sizing-addon2"></span>
-
-                                                                <select style={{ fontSize: "15px", width: "200px" }} value={this.state.BlogCategory}
-                                                                    onChange={(e) => this.setBlogCategoryFunction(e)} className="form-control">
-                                                                    <option value="3D">3D</option>
-                                                                    <option value="Architect">Architect</option>
-                                                                    <option value="Construction">Construction</option>
-                                                                    <option value="Design">Design</option>
-                                                                    <option value="Home Decoration">Home Decoration</option>
-                                                                    <option value="Interior">Interior</option>
-                                                                    <option value="Landscape">Landscape</option>
-                                                                </select>
-                                                            </div>
-                                                            <br />
-
-                                                            <h3>Write the Blog. <span className="text-red">*</span></h3>
-
-                                                            {/* Modal */}
-                                                            <div className="modal fade" id="exampleModal" tabIndex={1} aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                {(this.state.showInsertHeadingModal) ? (
-                                                                    <div className="modal-dialog">
-                                                                        <div className="modal-content">
-                                                                            <div className="modal-header">
-                                                                                <h5 className="modal-title" id="exampleModalLabel">INSERT HEADING</h5>
-                                                                                <button type="button" className="btn-close" data-mdb-dismiss="modal" onClick={() => this.setState({ showInsertHeadingModal: false })} aria-label="Close" />
-                                                                            </div>
-                                                                            <div className="modal-body">
-                                                                                <input type="text" placeholder="Heading eg:A project for falan falan" value={this.state.TempHeadingsBlog} onChange={(e) => this.setState({ TempHeadingsBlog: e.target.value })} className="form-control title" aria-label="..." />
-                                                                            </div>
-                                                                            <div className="modal-footer">
-                                                                                <button type="button" className="btn btn-secondary" onClick={() => this.setState({ showInsertHeadingModal: false })} data-mdb-dismiss="modal">
-                                                                                    Close
-                                                                                </button>
-                                                                                <button type="button" onClick={() => this.setState({
-                                                                                    BlogDescription: this.state.BlogDescription + `<h1 className="text-dark text-bold">${this.state.TempHeadingsBlog}</h1>`,
-                                                                                    TempHeadingsBlog: "",
-                                                                                    showInsertHeadingModal: false
-                                                                                })}
-                                                                                    data-mdb-dismiss="modal"
-                                                                                    aria-label="Insert"
-                                                                                    className="btn btn-primary"
-                                                                                >Insert
-                                                                                </button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                ) : (
-                                                                    <div className="modal-dialog">
-                                                                        <div>Error</div>
-                                                                    </div>
-                                                                )}
-
-                                                                {(this.state.showInsertParagraphModal) ? (
-                                                                    <div className="modal-dialog">
-                                                                        <div className="modal-content">
-                                                                            <div className="modal-header">
-                                                                                <h5 className="modal-title" id="exampleModalLabel">INSERT PARAGRAPH</h5>
-                                                                                <button type="button" className="btn-close" onClick={() => this.setState({ showInsertParagraphModal: false })} data-mdb-dismiss="modal" aria-label="Close" />
-                                                                            </div>
-                                                                            <div className="modal-body">
-
-                                                                                {/*Textarea with icon prefix*/}
-                                                                                <div className="md-form">
-                                                                                    <i className="fas fa-pencil-alt prefix" />
-                                                                                    <textarea id="form10" value={this.state.TempHeadingsBlog} placeholder="Start writing the paragraph" onChange={(e) => this.setState({ TempHeadingsBlog: e.target.value })} className="md-textarea form-control" rows={3} />
-                                                                                    <label htmlFor="form10"></label>
-                                                                                </div>
-
-                                                                            </div>
-                                                                            <div className="modal-footer">
-                                                                                <button type="button" onClick={() => this.setState({ showInsertParagraphModal: false })} className="btn btn-secondary" data-mdb-dismiss="modal">
-                                                                                    Close
-                                                                                </button>
-                                                                                <button type="button" onClick={() => this.setState({
-                                                                                    BlogDescription: this.state.BlogDescription + `<p className="text-dark">${this.state.TempHeadingsBlog}</p>`,
-                                                                                    TempHeadingsBlog: "",
-                                                                                    showInsertParagraphModal: false
-                                                                                })}
-                                                                                    data-mdb-dismiss="modal"
-                                                                                    aria-label="Insert"
-                                                                                    className="btn btn-primary"
-                                                                                >Insert
-                                                                                </button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                ) : (
-                                                                    <div>Error</div>
-                                                                )}
-
-
-                                                                {(this.state.showInsertImageModal) ? (
-                                                                    <div className="modal-dialog">
-                                                                        <div className="modal-content">
-                                                                            <div className="modal-header">
-                                                                                <h5 className="modal-title" id="exampleModalLabel">INSERT IMAGE <span className="text-red">*</span><i className="fas fa-image mt-2 ml-2 text-primary fa-lg"></i></h5>
-                                                                                <button type="button" className="btn-close" onClick={() => this.setState({ showInsertImageModal: false })} data-mdb-dismiss="modal" aria-label="Close" />
-                                                                            </div>
-                                                                            <div className="modal-body">
-                                                                                <ol>
-                                                                                    <li>
-
-                                                                                        <h4>Enter an Image URL</h4>
-                                                                                        <input type="text" style={{ fontSize: "18px" }} placeholder="Enter the Image URL" value={this.state.TempBlogImageURL} onChange={(e) => this.setState({ TempBlogImageURL: e.target.value })} className="form-control title" aria-label="..." />
-                                                                                        <br />
-                                                                                        <h5 className="text-center">OR <i className="fas fa-info-circle"></i></h5>
-                                                                                        <br />
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <h3>Upload Image from your Device: </h3>
-                                                                                        <MDBProgress value={this.state.BlogTempImageProgress} className="my-2" height="20px" />
-                                                                                        <label htmlFor="">Upload Image for blog</label>
-                                                                                        <input type="file" className="form-control" onChange={(e) => this.handleTempImageUpload(e)} />
-                                                                                        <br />
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <h4>Enter an Image Alternative Text (Optional) but Recommended</h4>
-                                                                                        <input type="text" style={{ fontSize: "18px" }} placeholder="Enter the Image Alternative Text" value={this.state.TempBlogImageALT} onChange={(e) => this.setState({ TempBlogImageALT: e.target.value })} className="form-control title" aria-label="..." />
-                                                                                        <br />
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <h4>Enter an Image Title (Optional) but Recommended</h4>
-                                                                                        <input type="text" style={{ fontSize: "18px" }} placeholder="Enter the Image Alternative Text" value={this.state.TempBlogImageTitle} onChange={(e) => this.setState({ TempBlogImageTitle: e.target.value })} className="form-control title" aria-label="..." />
-                                                                                    </li>
-                                                                                </ol>
-                                                                                <br />
-                                                                                <img className="border img-fluid" src={this.state.TempBlogImageURL} title={this.state.TempBlogImageTitle} alt={this.state.TempBlogImageALT} />
-                                                                            </div>
-                                                                            <div className="modal-footer">
-                                                                                <button type="button" onClick={() => this.setState({ showInsertImageModal: false })} className="btn btn-secondary" data-mdb-dismiss="modal">
-                                                                                    Close
-                                                                                </button>
-                                                                                {(this.state.TempBlogImageURL === "") ? (
-                                                                                    <button type="button"
-                                                                                        disabled={true}
-                                                                                        className="btn btn-primary"
-                                                                                    >Insert
-                                                                                    </button>
-                                                                                ) : (
-                                                                                    <button type="button" onClick={() => this.setState({
-                                                                                        BlogDescription: this.state.BlogDescription + `<img className="img-fluid" src="${this.state.TempBlogImageURL}" alt="${this.state.TempBlogImageALT}" title="${this.state.TempBlogImageTitle}" /> <br />`,
-                                                                                        TempHeadingsBlog: "",
-                                                                                        showInsertImageModal: false,
-                                                                                        TempBlogImageURL: "",
-                                                                                        TempBlogImageTitle: "",
-                                                                                        TempBlogImageALT: "",
-                                                                                        BlogTempImageProgress: 0
-                                                                                    })}
-                                                                                        data-mdb-dismiss="modal"
-                                                                                        aria-label="Insert"
-                                                                                        className="btn btn-primary"
-                                                                                    >Insert
-                                                                                    </button>
-                                                                                )}
-
-
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                ) : (
-                                                                    <div>Error</div>
-                                                                )}
-
-                                                            </div>
-                                                            {/* Modal */}
-
-                                                            {/* Here all the formatting will be done */}
-
-                                                            <div className="border buttonsBlockBlogFormatting">
-                                                                <button
-                                                                    data-mdb-toggle="modal"
-                                                                    data-mdb-target="#exampleModal"
-                                                                    className="btn btn-primary"
-                                                                    onClick={() => this.setState({
-                                                                        showInsertHeadingModal: true
-                                                                    })}
-                                                                >Insert Heading
-                                                                </button>
-
-                                                                <button
-                                                                    className="btn btn-danger"
-                                                                    onClick={() => this.setState({
-                                                                        BlogDescription: this.state.BlogDescription + `<br />`
-                                                                    })}
-                                                                >Line Break</button>
-
-                                                                <button
-                                                                    className="btn btn-warning"
-                                                                    data-mdb-toggle="modal"
-                                                                    data-mdb-target="#exampleModal"
-                                                                    onClick={() => this.setState({
-                                                                        showInsertParagraphModal: true
-                                                                    })}
-                                                                >Insert Paragraph</button>
-
-                                                                <button
-                                                                    className="btn btn-info"
-                                                                    data-mdb-toggle="modal"
-                                                                    data-mdb-target="#exampleModal"
-                                                                    onClick={() => this.setState({
-                                                                        showInsertImageModal: true
-                                                                    })}
-                                                                >Insert Image</button>
-
-                                                                <button
-                                                                    className='btn btn-danger'
-                                                                    onClick={() => {
-                                                                        this.setState({
-                                                                            BlogDescription: ""
-                                                                        })
-                                                                        alert("Content Removed Successfully.")
-                                                                    }
-
-                                                                    }
-
-                                                                    title="Will Remove All the written Code"
-                                                                >
-                                                                    Remove All (X)
-                                                                </button>
-
-                                                            </div>
-
-                                                            {/* Here all the formatting will be done */}
-
-                                                            <br />
-
-                                                            <textarea name="" cols="70" rows="10" className="form-control paraAdmin" placeholder="Write the Blog Include Images,Videos,etc" value={this.state.BlogDescription} onChange={(e) => this.setState({ BlogDescription: e.target.value })}></textarea>
-
-                                                            <div className="container border mt-2 mb-2" dangerouslySetInnerHTML={{ __html: this.state.BlogDescription }} />
-
-                                                            {/* Here the uploaded image will be here */}
-                                                            <div>
-                                                                <br />
-                                                                <h3>Upload the front Image for the Blog : <span className="text-red">*</span></h3>
-                                                                <MDBProgress value={this.state.BlogFrontImageProgress} className="my-2" height="20px" />
-                                                                <label htmlFor="">Upload A Image that will appear of the front of the Blog</label>
-                                                                <input type="file" className="form-control" onChange={(e) => this.handleUploadBlogFrontImage(e)} />
-                                                                {/* <button className="btn btn-primary uploadBtn mt-3" onClick={(e) => this.testUpload(e)}>Upload</button> */}
-                                                                <br />
-                                                                <br />
-                                                                <h4 className="ColorBloGText border">{this.state.disc}</h4>
-                                                                <div className="border">
-                                                                    {/* Here the loop div is here */}
-                                                                    <img className="border img-fluid ml-2 mt-2" src={this.state.BlogFrontImageURL} alt="Front Image of The Blog" />
-                                                                </div>
-                                                            </div>
-                                                            {/* Here the uploaded image will be here */}
-
-                                                            <br />
-
-                                                            <div>
-                                                                <h3>Enter the Cover Para of the Blog : <span className="text-red">*</span></h3>
-                                                                <textarea name="" cols="70" rows="10" className="form-control paraAdmin" placeholder="Write the Cover paragraph for the Blog" value={this.state.FrontParaBlog} onChange={(e) => this.setState({ FrontParaBlog: e.target.value })}></textarea>
-                                                            </div>
-
-                                                            <br />
-
-                                                            <div>
-                                                                <h3>Enter the Author of the Blog : <span className="text-red">*</span></h3>
-                                                                <input type="text" placeholder="Eg: Philip Stejskal Architecture,Ali Imran etc" value={this.state.BlogAuthor} onChange={(e) => this.setState({ BlogAuthor: e.target.value })} className="form-control title" aria-label="..." />
-                                                            </div>
-
-                                                            <br />
-
-                                                            <div>
-                                                                <h3>Enter the Hashtags of the Blog : <span className="text-red">*</span></h3>
-                                                                <input type="text" placeholder="Eg: //#endregion etc" value={this.state.BlogHashTags} onChange={(e) => this.setState({ BlogHashTags: e.target.value })} className="form-control title" aria-label="..." />
-                                                                <button className="btn btn-primary mt-3 mb-3" onClick={() => this.setState({
-                                                                    BlogHashTagsArray: [...this.state.BlogHashTagsArray, this.state.BlogHashTags],
-                                                                    BlogHashTags: ""
-                                                                })}>Insert</button>
-
-                                                                <br />
-
-
-                                                                {this.state.BlogHashTagsArray.map((v, i) => {
-                                                                    return <li key={i} style={{ display: "inline-block", listStyle: "none" }}>
-                                                                        <div>
-                                                                            {/* Here the loop div is here */}
-                                                                            <a href={`blog/${v}`} className="border ml-2 mt-2 hastagsBlog">{v}</a>
-                                                                            {/* Here the loop div is here */}
-                                                                        </div>
-
-                                                                    </li>
-                                                                })}
-
-                                                                <h4 className="border mt-2" dangerouslySetInnerHTML={{ __html: this.state.BlogHashTags }} />
-                                                            </div>
-
-                                                            <br />
-
-                                                            {(this.state.BlogTitle == "" || this.state.BlogCategory == "" || this.state.BlogDescription == "" || this.state.BlogFrontImageURL == "" || this.state.BlogAuthor == "" || this.state.FrontParaBlog == "" || this.state.BlogHashTagsArray.length <= 2) ? (
-                                                                <div>
-                                                                    <h4 className="text-red">Please fill all the fields indicated as necessary with * sign to submit</h4>
-                                                                    <button disabled={true} className="btn btn-success btn-block">Submit</button>
-                                                                </div>
-                                                            ) : (
-                                                                <div>
-                                                                    <h4 className="mt-2">You are ready to post the Blog.</h4>
-                                                                    <button className="btn btn-success btn-block" onClick={this.sendDataBlog}>Submit</button>
-                                                                </div>
-                                                            )}
-                                                            <br />
-                                                            <div className="text-center">
-                                                                <h3 style={{ fontWeight: "lighter" }}>You are successfully logged in</h3>
-                                                                <button className="btn btn-danger" onClick={this.sign_out}>Sign Out</button>
-                                                                <br />
-                                                            </div>
-                                                            <br />
-
-                                                        </div>
-                                                        <br />
                                                     </div>
                                                     {/* Here the game starts */}
                                                 </div>
@@ -1202,4 +868,4 @@ class Admin extends React.Component {
     }
 }
 
-export default Admin;
+export default Projects;
