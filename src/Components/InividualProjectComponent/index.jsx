@@ -50,7 +50,7 @@ const InividualProjectComponent = (props) => {
             }
         })
 
-        console.log("Title is equal to : " + projectsEditData.Title)
+        //console.log("Title is equal to : " + projectsEditData.Title)
     })
 
     const deleteProject = (projectId) => {
@@ -179,20 +179,20 @@ const InividualProjectComponent = (props) => {
                         <div className="modal-body">
                             <form>
                                 <h4><b>Project No. :</b> <span id="check"></span></h4>
-                                <h4><b>Project ID :</b> {projectsEditData.id}</h4>
+                                <h4><b>Project ID :</b> </h4>
                                 <div className="mb-3">
                                     <label htmlFor="recipient-name" className="col-form-label">Recipient:</label>
                                     <input
                                         type="text"
                                         className="form-control"
-                                        value={projectsEditData.Title}
-                                        onChange={(e) => handleChange("Title", e)}
+                                        // value={projectsEditData.Title}
+                                        // onChange={(e) => handleChange("Title", e)}
                                         id="recipient-name"
                                     />
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="message-text" className="col-form-label">Message:</label>
-                                    <textarea className="form-control" id="message-text" value={projectsEditData.Description} onChange={(e) => setProjectsEditData({ Description: e.target.value })} />
+                                    {/* <textarea className="form-control" id="message-text" value={projectsEditData.Description} onChange={(e) => setProjectsEditData({ Description: e.target.value })} /> */}
                                 </div>
                             </form>
                         </div>
