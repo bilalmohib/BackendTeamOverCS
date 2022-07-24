@@ -67,31 +67,7 @@ const InividualProjectComponent = (props) => {
     }
 
     const editProject = (
-        number,
-        id,
-        uid,
-        userEmail,
-        Title,
-        Description,
-        ImageURLArray,
-        Architects,
-        ProjectClient,
-        Area,
-        CompletionDate,
-        StructuralEngineers,
-        LandscapeArchitects,
-        projectSiteLocation,
-        GoogleMapLink,
-        Key,
-        timeSubmitted,
-        //New entities
-        ProjectSector,
-        ProjectService,
-        ArchitecturalTeam,
-        InteriorPersons,
-        LandscapePersons,
-        BuilderArchitects,
-        PhotographyPersons
+        id
     ) => {
         setCheck(number)
         document.getElementById("check").innerHTML = number
@@ -133,35 +109,7 @@ const InividualProjectComponent = (props) => {
                     className="btn btn-edit btn-warning btn-lg"
                     // data-mdb-toggle="modal"
                     // data-mdb-target="#staticBackdrop"
-                    onClick={
-                        () => editProject(
-                            props.number,
-                            props.id,
-                            props.uid,
-                            props.userEmail,
-                            props.Title,
-                            props.Description,
-                            props.ImageURLArray,
-                            props.Architects,
-                            props.ProjectClient,
-                            props.Area,
-                            props.CompletionDate,
-                            props.StructuralEngineers,
-                            props.LandscapeArchitects,
-                            props.projectSiteLocation,
-                            props.GoogleMapLink,
-                            props.Key,
-                            props.timeSubmitted,
-                            //New entities
-                            props.ProjectSector,
-                            props.ProjectService,
-                            props.ArchitecturalTeam,
-                            props.InteriorPersons,
-                            props.LandscapePersons,
-                            props.BuilderArchitects,
-                            props.PhotographyPersons
-                        )}
-                >
+                    onClick={() => editProject(props.id)}>
                     EDIT
                 </button>
                 <button type="button" data-mdb-toggle="modal"
