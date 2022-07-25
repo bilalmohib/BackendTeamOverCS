@@ -1,4 +1,4 @@
-.projectInividualComponent {
+.InividualComponent {
     padding: 10px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 10px;
@@ -8,4 +8,22 @@
 .btn-delete, .btn-edit {
     font-size: 20px !important;
     border-radius: 10px !important;
+}
+
+.editInput {
+    /* width: 40% !important; */
+    width: 100%;
+
+}
+
+.headingAttr {
+    width: fit-content !important;
+    /* border: 1px solid black; */
+    white-space: nowrap;
+}
+
+.container_input {
+    width: 100%;
+    margin-top: -5px;
+    margin-left: 1%;
 }

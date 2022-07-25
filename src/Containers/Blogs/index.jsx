@@ -3,11 +3,11 @@ import Header from '../../Components/Header';
 import Footer from '../../Components/Footer';
 import Loader from "../../Components/Loader";
 
-import DatePicker from 'react-date-picker';
+// import DatePicker from 'react-date-picker';
 
 import logo from "../../assets/logo copy.png"
 
-import { Link, useHistory } from "react-router-dom"
+// import { Link, useHistory } from "react-router-dom"
 import '../../css/Admin.css';
 
 import firebase from "../../firebase/index";
@@ -16,8 +16,8 @@ import { storage } from '../../firebase/index';
 
 import "./style.css";
 
-import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBProgress } from 'mdbreact';
-import AllProjects from '../../Components/Projects/AllProjects';
+import { MDBProgress } from 'mdbreact';
+import AllBlogs from '../../Components/Blogs/AllBlogs';
 
 const currentDate = new Date();
 
@@ -29,29 +29,7 @@ class Blogs extends React.Component {
             password: "",
             status: null,
             // Here the important attributes start
-            title: "",
-            projectClient: "",
-            areaHeight: 0,
-            areaWidth: 0,
-            areaUnit: "",
-            category: "",
-            disc: "",
-            architects: "",
-            completionDate: currentDate,
-            StructuralEngineers: "",
-            projectSector: "",
-            projectService: "",
-            LandscapeArchitects: "",
-            ProjectArchitects: "",
-            builderArchitects: "",
-            photographyPersons: "",
-            interiorArchitects: "",
-            projectSiteLocation: "",
-            GoogleMapLink: "",
-            // Here the important attributes start
-            ImageURLArray: [],
             progress: 0,
-            filesArray: [],
             ///////////////////////////////////Here the Blog states start/////////////////////////////////////////////////
             // For The BLOG Description
             TempHeadingsBlog: "",
@@ -78,7 +56,6 @@ class Blogs extends React.Component {
             //Signed In user data
             signedInUserData: null,
             blogloader: false,
-            projectloader: false
             //Blog Inside Image
             //For images
             ///////////////////////////////////Here the Blog states start/////////////////////////////////////////////////
@@ -105,33 +82,6 @@ class Blogs extends React.Component {
         })
     }
 
-    setProjectCategoryFunction = (e) => {
-        let selectCategory = e.target.value
-        alert(`${selectCategory} is the Category you selected`);
-        // setCategory(selectCategory);
-        this.setState({
-            category: selectCategory
-        })
-    }
-
-    setProjectSectorFunction = (e) => {
-        let selectSector = e.target.value
-        alert(`${selectSector} is the Category you selected`);
-        // setSector(selectSector);
-        this.setState({
-            projectSector: selectSector
-        })
-    }
-
-    setProjectServiceFunction = (e) => {
-        let selectService = e.target.value
-        alert(`${selectService} is the Category you selected`);
-        // setSector(selectService);
-        this.setState({
-            projectService: selectService
-        })
-    }
-
     setBlogCategoryFunction = (e) => {
         let selectCategory = e.target.value
         alert(`${selectCategory} is the Category you selected`);
@@ -139,44 +89,6 @@ class Blogs extends React.Component {
         this.setState({
             BlogCategory: selectCategory
         })
-    }
-
-
-    handleUpload = (e) => {
-        if (true) {
-            const file = Array.from(e.target.files);
-            console.log("files==>", file);
-            // setfilesArray(file);
-            var progress = 0;
-            file.forEach((file) => {
-                const uploadTask = storage.ref(`ProjectImages/${file.name}`).put(file);
-                uploadTask.on('state_changed',
-                    (snapshot) => {
-                        // progrss function ....
-                        progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-
-                        console.log(progress)
-                    },
-                    (error) => {
-                        // error function ....
-                        alert(error);
-                    },
-                    () => {
-                        // complete function ....
-                        storage.ref('ProjectImages').child(file.name).getDownloadURL().then(url => {
-                            // setImageURL(url);
-                            //console.log("UUUU==>",url);
-                            this.globalImageURLArray.push(url);
-                            this.setState({
-                                progress: progress,
-                                ImageURLArray: this.globalImageURLArray
-                            })
-                        })
-                    });
-
-            });
-            console.log("Global Image Array==>", this.globalImageURLArray);
-        }
     }
 
     handleUploadBlogFrontImage = (e) => {
@@ -255,111 +167,8 @@ class Blogs extends React.Component {
         }
     }
 
-    sendDataProject = () => {
-
-        // alert("Submitting your project.Please wait for atleast 5 seconds.......")
-
-        //Initializing the database varaible db
-        const db = firebase.firestore();
-        // Initializing the ref for blog submission to database
-        const projectsDbReference = db.collection(`Projects/`);
-
-        ////////////////////////////To take the current date and time//////////////////////////////////
-        let today = new Date();
-        let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-        let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-        let dateTime = date + ' ' + time;
-        dateTime = dateTime.toString();
-        // console.log("Completetion Date=>",this.state.completionDate)
-        ////////////////////////////To take the current date and time//////////////////////////////////
-
-        let cd = this.state.completionDate;
-
-        let completionDate = cd.getFullYear() + '-' + (cd.getMonth() + 1) + '-' + cd.getDate();
-
-        completionDate = completionDate.toString();
-
-        let key = firebase.database().ref('Projects/').push().key;
-
-        let projectAreaCombined = (this.state.areaHeight).toString() + (this.state.areaWidth).toString() + (this.state.areaUnit).toString();
-
-        let projectDataObject = {
-            Title: this.state.title,
-            Description: this.state.disc,
-            ImageURLArray: this.state.ImageURLArray,
-            Architects: this.state.architects,
-            ProjectClient: this.state.projectClient,
-            Area: projectAreaCombined,
-            CompletionDate: completionDate,
-            StructuralEngineers: this.state.StructuralEngineers,
-            LandscapeArchitects: this.state.LandscapeArchitects,
-            projectSiteLocation: this.state.projectSiteLocation,
-            GoogleMapLink: this.state.GoogleMapLink,
-            Key: key,
-            timeSubmitted: dateTime,
-            //New entities
-            ProjectSector: this.state.projectSector,
-            ProjectService: this.state.projectService,
-            ArchitecturalTeam: this.state.ProjectArchitects,
-            InteriorPersons: this.state.interiorArchitects,
-            LandscapePersons: this.state.LandscapeArchitects,
-            BuilderArchitects: this.state.builderArchitects,
-            PhotographyPersons: this.state.photographyPersons
-        }
-
-        console.log("Project Data Object is ========> ", projectDataObject)
-
-        projectsDbReference.add(projectDataObject).then(() => {
-            //Here when the data is sent successfully this function will be triggered
-            console.log("Project Data sent Successfully");
-            //Alert the user that blog is submitted
-            alert("Congratulations!.Your Project is Submitted Successfully.");
-            //Clear the states
-            this.setState({
-                // Here the attributes start for the blog
-                title: "",
-                disc: "",
-                ImageURLArray: [],
-                architects: "",
-                projectClient: "",
-                areaHeight: 0,
-                areaWidth: 0,
-                progress: 0,
-                areaUnit: "",
-                completionDate: new Date(),
-                StructuralEngineers: "",
-                LandscapeArchitects: "",
-                projectSiteLocation: "",
-                GoogleMapLink: "",
-                key: "",
-                dateTime: "",
-                //New entities
-                projectSector: "",
-                projectService: "",
-                ProjectArchitects: "",
-                interiorArchitects: "",
-                LandscapeArchitects: "",
-                builderArchitects: "",
-                photographyPersons: ""
-            })
-        })
-
-        this.globalImageURLArray = [];
-
-    }
-
-    enableTheBlog = () => {
-        this.setState({
-            blogloader: true
-        })
-    }
-
     sendDataBlog = () => {
         if (this.state.status != null) {
-            // this.setState({
-            //     blogloader: true
-            // })
-            // this.enableTheBlog();
             alert("Please wait submitting the blog data.");
             ////////////////////////////To take the current date and time//////////////////////////////////
             let today = new Date();
@@ -479,29 +288,6 @@ class Blogs extends React.Component {
                 <br />
                 <br />
 
-                {/* MODAL */}
-                {/* <div className="modal fade" id="exampleModal" tabIndex={1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div className="modal-dialog" role="document">
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <h5 className="modal-title" id="exampleModalLabel">Project Submission</h5>
-                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
-                                </button>
-                            </div>
-                            <div className="modal-body">
-                                <div className="text-info">
-                                    <h1>"Please wait for 5 seconds atleast.We are saving your project to cloud.Thanks!"</h1>
-                                </div>
-                            </div>
-                            <div className="modal-footer">
-                                <button type="button" className="btn btn-primary" data-dismiss="modal">Acknowledged</button>
-                            </div>
-                        </div>
-                    </div>
-                </div> */}
-                {/* MODAL */}
-
                 {(firebase.auth().currentUser == null) ? (
                     <div>
                         <h3 className="text-center text-danger">Logged out</h3>
@@ -531,16 +317,15 @@ class Blogs extends React.Component {
                                 <div className="tab-content" id="ex2-content">
                                     <div className="tab-pane fade show active" id="ex2-tabs-1" role="tabpanel" aria-labelledby="ex2-tab-1">
                                         <div className="container border">
-                                            {(this.state.projectloader == false) ? (
+                                            {(this.state.blogloader == false) ? (
                                                 <div>
                                                     <div className="container admin-container">
                                                         {/* Here the game starts */}
                                                         <div>
-                                                            <h1 className="text-inverse mt-3">All Blogs Are Listed Here You can <span className='text-warning'>Edit</span> them or <span className='text-danger'>delete</span> them </h1>
-                                                            <hr />
-
+                                                            <br />
+                                                            <AllBlogs />
+                                                            <br />
                                                         </div>
-                                                        <br />
                                                     </div>
                                                     {/* Here the game starts */}
                                                 </div>

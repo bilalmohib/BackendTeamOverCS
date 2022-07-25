@@ -4,14 +4,14 @@ import 'firebase/firestore';
 import { storage } from '../../../firebase/index';
 
 //Importing components
-import InividualProjectComponent from "../InividualProjectComponent";
+import InividualBlogComponent from "../InividualBlogComponent";
 
 const AllBlogs = () => {
 
     const [status, setStatus] = useState(false);
     const [signedInUserData, setSignedInUserData] = useState(null)
     const [loading, setLoading] = useState(false);
-    const [projectReload, setProjectReload] = useState(false);
+    const [blogReload, setBlogReload] = useState(false);
     const [firestoreData, setFirestoreData] = useState([]);
 
     useEffect(() => {
@@ -27,10 +27,10 @@ const AllBlogs = () => {
             }
         })
 
-        console.log("All the Projects Data in the Projects Component is : ", firestoreData);
+        console.log("All the Blogs Data in the Blogs Component is : ", firestoreData);
 
         const db = firebase.firestore();
-        db.collection(`Projects`)
+        db.collection(`Blogs`)
             .get()
             .then(snapshot => {
                 let data = [];
@@ -39,41 +39,23 @@ const AllBlogs = () => {
                         "id": element.id,
                         "uid": element.uid,
                         "userEmail": element.userEmail,
-                        "Title": element.Title,
-                        "Description": element.Description,
-                        "ImageURLArray": element.ImageURLArray,
-                        "Architects": element.Architects,
-                        "ProjectClient": element.ProjectClient,
-                        "Area": element.Area,
-                        "CompletionDate": element.CompletionDate,
-                        "StructuralEngineers": element.StructuralEngineers,
-                        "LandscapeArchitects": element.LandscapeArchitects,
-                        "projectSiteLocation": element.projectSiteLocation,
-                        "GoogleMapLink": element.GoogleMapLink,
-                        "Key": element.Key,
-                        "timeSubmitted": element.timeSubmitted,
-                        //New entities
-                        "ProjectSector": element.ProjectSector,
-                        "ProjectService": element.ProjectService,
-                        "ArchitecturalTeam": element.ArchitecturalTeam,
-                        "InteriorPersons": element.InteriorPersons,
-                        "LandscapePersons": element.LandscapePersons,
-                        "BuilderArchitects": element.BuilderArchitects,
-                        "PhotographyPersons": element.PhotographyPersons
+                        "BlogTitle": element.BlogTitle,
+                        "BlogSubmissionDate": element.BlogSubmissionDate,
+                        "BlogHashTagsArray": element.BlogHashTagsArray,
+                        "BlogDescription": element.BlogDescription,
+                        "BlogCoverPara": element.BlogCoverPara,
+                        "BlogCoverImageUrl": element.BlogCoverImageUrl,
+                        "BlogCategory": element.BlogCategory,
+                        "BlogAuthor": element.BlogAuthor,
                     }, element.data()))
                 })
-                console.log("data of projects from cloud is equal to ==> ", data)
-                ///////////////////////////////Here is the code for sending notifications
-                ///////////////////////////////Here is the code for sending notifications
+                console.log("All data of blogs from cloud is equal to ==> ", data)
 
-                ///////////////////////////////Here is the code for sending notifications
-                ///////////////////////////////Here is the code for sending notifications
-
-                if (firestoreData.length !== data.length || projectReload == true) {
+                if (firestoreData.length !== data.length || blogReload == true) {
                     setFirestoreData(data);
                     setLoading(true);
-                    setProjectReload(false);
-                    console.log("Updated")
+                    setBlogReload(false);
+                    console.log("Updated ...");
                 }
             }).catch(err => {
                 console.log(err)
@@ -86,42 +68,30 @@ const AllBlogs = () => {
                 <div className="col-md-12 border">
                     <h2 className="text-dark text-bold">
                         <b>
-                            All the projects are listed here.You can <span className="text-danger">Delete</span> them or <span className="text-warning">Edit</span> them.
+                            All the Blogs are listed here.You can <span className="text-danger">Delete</span> them or <span className="text-warning">Edit</span> them.
                         </b>
                     </h2>
                     <br />
                     {firestoreData.map((element, i) => {
                         return (
                             <div key={i}>
-                                <InividualProjectComponent
+                                <InividualBlogComponent
                                     number={(i + 1)}
                                     id={element.id}
                                     uid={element.uid}
                                     userEmail={element.userEmail}
-                                    Title={element.Title}
-                                    reloadProject={setProjectReload}
-                                    Description={element.Description}
-                                    ImageURLArray={element.ImageURLArray}
-                                    Architects={element.Architects}
-                                    ProjectClient={element.ProjectClient}
-                                    Area={element.Area}
-                                    CompletionDate={element.CompletionDate}
-                                    StructuralEngineers={element.StructuralEngineers}
-                                    LandscapeArchitects={element.LandscapeArchitects}
-                                    projectSiteLocation={element.projectSiteLocation}
-                                    GoogleMapLink={element.GoogleMapLink}
-                                    Key={element.Key}
-                                    timeSubmitted={element.timeSubmitted}
-                                    //New entities
-                                    ProjectSector={element.ProjectSector}
-                                    ProjectService={element.ProjectService}
-                                    ArchitecturalTeam={element.ArchitecturalTeam}
-                                    InteriorPersons={element.InteriorPersons}
-                                    LandscapePersons={element.LandscapePersons}
-                                    BuilderArchitects={element.BuilderArchitects}
-                                    PhotographyPersons={element.PhotographyPersons}
+                                    BlogTitle={element.BlogTitle}
+                                    BlogSubmissionDate={element.BlogSubmissionDate}
+                                    BlogHashTagsArray={element.BlogHashTagsArray}
+                                    BlogDescription={element.BlogDescription}
+                                    BlogCoverPara={element.BlogCoverPara}
+                                    BlogCoverImageUrl={element.BlogCoverImageUrl}
+                                    BlogCategory={element.BlogCategory}
+                                    BlogAuthor={element.BlogAuthor}
+                                    reloadBlog={setBlogReload}
                                 />
                             </div>
+
                         )
                     })}
                 </div>

@@ -7,30 +7,26 @@ import "./style.css";
 
 const InividualProjectComponent = (props) => {
     const [status, setStatus] = useState(false);
-    const [signedInUserData, setSignedInUserData] = useState(null)
+    const [signedInUserData, setSignedInUserData] = useState(null);
 
-    const [check, setCheck] = useState("");
+    const [edit, setEdit] = useState(false);
 
     //New entities
-    const [number, setNumber] = useState("");
-    const [id, setId] = useState("");
-    const [uid, setUid] = useState("");
-    const [userEmail, setUserEmail] = useState("");
-    const [Title, setTitle] = useState("");
-    const [Description, setDescription] = useState("");
+    const [Title, setTitle] = useState(props.Title);
+    const [Description, setDescription] = useState(props.Description);
     const [ImageURLArray, setImageURLArray] = useState("");
     const [Architects, setArchitects] = useState("");
-    const [ProjectClient, setProjectClient] = useState("");
-    const [Area, setArea] = useState("");
+    const [ProjectClient, setProjectClient] = useState(props.ProjectClient);
+    const [Area, setArea] = useState(props.Area);
     const [CompletionDate, setCompletionDate] = useState("");
     const [StructuralEngineers, setStructuralEngineers] = useState("");
     const [LandscapeArchitects, setLandscapeArchitects] = useState("");
-    const [projectSiteLocation, setProjectSiteLocation] = useState("");
+    const [projectSiteLocation, setProjectSiteLocation] = useState(props.projectSiteLocation);
     const [GoogleMapLink, setGoogleMapLink] = useState("");
     const [Key, setKey] = useState("");
     const [timeSubmitted, setTimeSubmitted] = useState("");
     const [ProjectSector, setProjectSector] = useState("");
-    const [ProjectService, setProjectService] = useState("");
+    const [ProjectService, setProjectService] = useState(props.ProjectService);
     const [ArchitecturalTeam, setArchitecturalTeam] = useState("");
     const [InteriorPersons, setInteriorPersons] = useState("");
     const [LandscapePersons, setLandscapePersons] = useState("");
@@ -53,9 +49,15 @@ const InividualProjectComponent = (props) => {
         //console.log("Title is equal to : " + projectsEditData.Title)
     })
 
+    //Defining Firebase
+    const db = firebase.firestore();
+
+    const projectReference = db.collection("Projects");
+
+    //Defining Reference
+
     const deleteProject = (projectId) => {
-        const db = firebase.firestore();
-        db.collection("Projects").doc(projectId).delete().then(() => {
+        projectReference.doc(projectId).delete().then(() => {
             console.log("Project successfully deleted!");
             props.reloadProject(true);
             alert("Project Deleted Successfully.")
@@ -66,26 +68,98 @@ const InividualProjectComponent = (props) => {
         // alert(projectId)
     }
 
-    const editProject = (
-        id
-    ) => {
-        setCheck(number)
-        document.getElementById("check").innerHTML = number
-        alert(`Will implement Soon ${check}`)
+    const updateProject = (pid) => {
+        const projectUpdatedData = {
+            Title: Title,
+            ProjectClient: ProjectClient,
+            ProjectService: ProjectService,
+            projectSiteLocation: projectSiteLocation,
+            Area: Area,
+            Description: Description,
+        }
+
+        projectReference.doc(pid).update(projectUpdatedData)
+            .then(() => {
+                console.log("Project successfully updated!");
+                props.reloadProject(true);
+                // Set the edit state to false
+                setEdit(false);
+                alert(`Project Updated Successfully with id=${pid}.`)
+            }).catch((error) => {
+                console.error("Error updating Project: ", error);
+                alert("Error Updating Project.")
+            });
     }
 
     return (
-        <div className="projectInividualComponent">
+        <div className="InividualComponent">
             <div>
-                <h4><b>Project No. :</b> {props.number}</h4>
-                <h4><b>Project ID :</b> {props.id}</h4>
-                <h4><b>Project Title :</b> {props.Title}</h4>
-                <h4><b>Project Client :</b> {props.ProjectClient}</h4>
-                <h4><b>Project Scope :</b> {props.ProjectService}</h4>
-                <h4><b>Site Location :</b> {props.projectSiteLocation}</h4>
-                <h4><b>Project Size :</b> {props.Area}</h4>
-                <h4><b>Project Size :</b> {props.Area}</h4>
-                <h4><b>Project Description:</b> {props.Description} </h4>
+                <h4>
+                    <b>Project No. :</b> {props.number}
+                </h4>
+                <div className="mb-2">
+                    <h4 className="headingAttr"> <b>Project ID :</b> {props.id}</h4>
+                </div>
+                <div style={{ marginTop: "20px" }} className="d-flex mt-2">
+                    <h4 className="headingAttr"><b>Project Title :</b></h4>
+                    {(edit) ? (
+                        <div className="container_input">
+                            <input className="form-control editInput" placeholder="Enter the updated project title here ...." type="text" value={Title} onChange={(e) => setTitle(e.target.value)} />
+                        </div>
+                    ) : (
+                        <h4>{props.Title}</h4>
+                    )}
+                </div>
+                <div className="d-flex mt-2">
+                    <h4 className="headingAttr"><b>Project Client :</b></h4>
+                    {(edit) ? (
+                        <div className="container_input">
+                            <input className="form-control editInput" placeholder="Enter the updated project client here ...." type="text" value={ProjectClient} onChange={(e) => setProjectClient(e.target.value)} />
+                        </div>
+                    ) : (
+                        <h4>{props.ProjectClient}</h4>
+                    )}
+                </div>
+                <div className="d-flex mt-2">
+                    <h4 className="headingAttr"><b>Project Scope :</b></h4>
+                    {(edit) ? (
+                        <div className="container_input">
+                            <input className="form-control editInput" placeholder="Enter the updated project scope here ...." type="text" value={ProjectService} onChange={(e) => setProjectService(e.target.value)} />
+                        </div>
+                    ) : (
+                        <h4>{props.ProjectService}</h4>
+                    )}
+                </div>
+                <div className="d-flex mt-2">
+                    <h4 className="headingAttr"><b>Site Location :</b></h4>
+                    {(edit) ? (
+                        <div className="container_input">
+                            <input className="form-control editInput" placeholder="Enter the updated project location here ...." type="text" value={projectSiteLocation} onChange={(e) => setProjectSiteLocation(e.target.value)} />
+                        </div>
+                    ) : (
+                        <h4>{props.projectSiteLocation}</h4>
+                    )}
+                </div>
+                <div className="d-flex mt-2">
+                    <h4 className="headingAttr"><b>Project Size :</b></h4>
+                    {(edit) ? (
+                        <div className="container_input">
+                            <input className="form-control editInput" placeholder="Enter the updated project size here ...." type="text" value={Area} onChange={(e) => setArea(e.target.value)} />
+                        </div>
+                    ) : (
+                        <h4>{props.Area}</h4>
+                    )}
+                </div>
+                <div className="d-flex mt-2">
+                    <h4 className="headingAttr"><b>Project Description:</b></h4>
+                    {(edit) ? (
+                        <div className="container_input">
+                            <textarea rows="3" cols="3" className="form-control editInput" placeholder="Enter the updated project Description here ...." type="text" value={Description} onChange={(e) => setDescription(e.target.value)} />
+                        </div>
+                    ) : (
+                        <h4>{props.Description}</h4>
+                    )}
+                </div>
 
                 <br />
 
@@ -104,52 +178,21 @@ const InividualProjectComponent = (props) => {
 
             <div className="d-flex justify-content-evenly">
                 <button className="btn btn-delete btn-danger btn-lg" onClick={() => deleteProject(props.id)}>DELETE</button>
-                <button
-                    type="button"
-                    className="btn btn-edit btn-warning btn-lg"
-                    // data-mdb-toggle="modal"
-                    // data-mdb-target="#staticBackdrop"
-                    onClick={() => editProject(props.id)}>
-                    EDIT
-                </button>
-                <button type="button" data-mdb-toggle="modal"
-                    data-mdb-target="#staticBackdrop">Launch</button>
-            </div>
-
-            {/* Modal to Edit Projects */}
-            <div className="modal fade" id="staticBackdrop" data-mdb-backdrop="static" data-mdb-keyboard="false" tabIndex={-1} aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div className="modal-dialog modal-xl modal-dialog-scrollable">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h5 className="modal-title" id="staticBackdropLabel">Editing the project: <b>{props.Title}</b></h5>
-                            <button type="button" className="btn-close" data-mdb-dismiss="modal" aria-label="Close" />
-                        </div>
-                        <div className="modal-body">
-                            <form>
-                                <h4><b>Project No. :</b> <span id="check"></span></h4>
-                                <h4><b>Project ID :</b> </h4>
-                                <div className="mb-3">
-                                    <label htmlFor="recipient-name" className="col-form-label">Recipient:</label>
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        // value={projectsEditData.Title}
-                                        // onChange={(e) => handleChange("Title", e)}
-                                        id="recipient-name"
-                                    />
-                                </div>
-                                <div className="mb-3">
-                                    <label htmlFor="message-text" className="col-form-label">Message:</label>
-                                    {/* <textarea className="form-control" id="message-text" value={projectsEditData.Description} onChange={(e) => setProjectsEditData({ Description: e.target.value })} /> */}
-                                </div>
-                            </form>
-                        </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary">Understood</button>
-                        </div>
-                    </div>
-                </div>
+                {(edit) ? (
+                    <button
+                        type="button"
+                        className="btn btn-edit btn-success btn-lg"
+                        onClick={() => updateProject(props.id)}>
+                        UPDATE
+                    </button>
+                ) : (
+                    <button
+                        type="button"
+                        className="btn btn-edit btn-warning btn-lg"
+                        onClick={() => setEdit(true)}>
+                        EDIT
+                    </button>
+                )}
             </div>
         </div>
     )
